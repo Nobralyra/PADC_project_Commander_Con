@@ -22,26 +22,27 @@ public class TournamentController
         this.iTournamentService = iTournamentService;
     }
 
-    @GetMapping({"/tournament"})
+    @GetMapping({"/turnering"})
     public String tournamentPage(Model model)
     {
         //model.addAttribute("tournament", iTournamentService.findAll());
 
-        return ("/tournament/tournamentPage");
+        return ("/turnering/turnering_side");
     }
 
-    @GetMapping("/tournament/createTournament")
-    public String showCreate(Tournament tournament, Model model)
+    @GetMapping("/turnering/opret_turnering")
+    public String showCreateTournament(Tournament tournament, Model model)
     {
+        model.addAttribute("tournament");
 //        model.addAttribute("category", iCategoryCrudService.findAll());
 //        model.addAttribute("company", iCompanyCrudService.findAll());
 //        model.addAttribute("product", product);
 
-        return "/tournament/createTournament";
+        return "/turnering/opret_turnering";
     }
 
-    @GetMapping("/tournament/createTournament")
-    public String createProduct(@ModelAttribute("tournament") Tournament tournament, BindingResult bindingResult, Model model)
+    @PostMapping("/turnering/opret_turnering")
+    public String createTournament(@ModelAttribute("tournament") Tournament tournament, BindingResult bindingResult, Model model)
     {
 
         return "redirect:/";
