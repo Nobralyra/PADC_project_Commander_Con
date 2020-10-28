@@ -1,5 +1,6 @@
 package com.padc.demo.tournament.domain;
 
+import com.padc.demo.core.Audition;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

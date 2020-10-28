@@ -1,4 +1,4 @@
-package com.padc.demo;
+package com.padc.demo.core;
 
 import java.util.List;
 import java.util.Optional;

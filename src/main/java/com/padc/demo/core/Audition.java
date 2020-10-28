@@ -1,4 +1,4 @@
-package com.padc.demo.tournament.domain;
+package com.padc.demo.core;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
