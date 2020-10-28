@@ -13,20 +13,16 @@ public class Tournament extends Audition
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tournamentId;
 
-    @Lob
     private String tournamentName;
 
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime dateAndTime;
 
-    @Lob
     private String place;
 
-    @Lob
     private String tournamentType;
 
-    @Lob
     private String pointsType;
 
     @Lob
