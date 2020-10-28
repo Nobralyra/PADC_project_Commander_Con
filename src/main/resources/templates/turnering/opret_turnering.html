@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: headerElement">
     <meta charset="UTF-8">
     <title>Opret turnering</title>
 </head>
 <body>
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
-        <form th:action="@{/tournament/createTournament}" th:object="${tournament}" method="post">
+        <form th:action="@{/turnering/opret_turnering}" th:object="${tournament}" method="post">
             <div class="col-auto">
 
                 <div class="col-md-6">
