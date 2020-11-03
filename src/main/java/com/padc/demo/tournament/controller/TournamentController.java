@@ -34,9 +34,6 @@ public class TournamentController
     public String showCreateTournament(Tournament tournament, Model model)
     {
         model.addAttribute("tournament");
-//        model.addAttribute("category", iCategoryCrudService.findAll());
-//        model.addAttribute("company", iCompanyCrudService.findAll());
-//        model.addAttribute("product", product);
 
         return "/turnering/opret_turnering";
     }

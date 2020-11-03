@@ -12,6 +12,18 @@
                 <div class="col-md-6">
                     <h1>Opret en ny turnering</h1>
                 </div>
+
+                <div class="form-group col-md-6" >
+                    <label for="TournamentName">Turneringsnavn:</label>
+                    <input type="text" name="tournamentName" id="TournamentName" class="form-control" placeholder="Navn" th:field="*{tournamentName}">
+                    <span th:if="${#fields.hasErrors('tournamentName')}" th:errors="*{tournamentName}"></span>
+                </div>
+
+                <div class="form-group col-md-6" >
+                    <label for="DateAndTime">Dato og tid:</label>
+                    <input type="datetime-local" name="dateAndTime" id="DateAndTime" class="form-control" placeholder="Dato og tid" th:field="*{dateAndTime}">
+                    <span th:if="${#fields.hasErrors('dateAndTime')}" th:errors="*{dateAndTime}"></span>
+                </div>
             </div>
         </form>
 
