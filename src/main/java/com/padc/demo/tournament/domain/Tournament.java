@@ -4,29 +4,38 @@ import com.padc.demo.core.Audition;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "tournament")
+@SecondaryTable(name = "tournament_type_info")
 public class Tournament extends Audition
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tournamentId;
 
+    @NotBlank(message = "Indtast venligst turnerningsnavnet")
     private String tournamentName;
 
     @CreationTimestamp
-    @Column(updatable = false)
+    //@Column(updatable = false)
     private LocalDateTime dateAndTime;
 
     private String place;
 
+    @Column(table = "tournament_type_info")
     private String tournamentType;
 
+    @Column(table = "tournament_type_info")
     private String pointsType;
 
     @Lob
+    @Column(table = "tournament_type_info")
     private String furtherInformation;
+
+
 
     public Long getTournamentId()
     {
