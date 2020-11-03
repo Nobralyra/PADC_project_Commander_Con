@@ -17,7 +17,7 @@ public class Audition
 {
     @CreatedBy
     @Column(name = "created_by")
-    private String  createdBy;
+    private String createdBy;
 
     @CreatedDate
     @Column(name = "created_date")
