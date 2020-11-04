@@ -28,7 +28,6 @@
                 <div class="form-group col-md-6" >
                     <label for="Place">Sted</label>
                     <input type="text" name="place" id="Place" class="form-control" placeholder="Sted" th:field="*{place}">
-                    <span th:if="${#fields.hasErrors('place')}" th:errors="*{place}"></span>
                 </div>
 
                 <div class="form-group col-md-6" >
@@ -79,14 +78,17 @@
                             <label class="custom-control-label" for="andetPointsType">Andet</label>
                         </div>
 
-                        <span th:if="${#fields.hasErrors('tournamentType')}" th:errors="*{pointsType}"></span>
+                        <span th:if="${#fields.hasErrors('pointsType')}" th:errors="*{pointsType}"></span>
                     </div>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="FurtherInformation">Yderligere information</label>
                     <textarea input th:field="*{furtherInformation}" class="form-control" id="FurtherInformation" rows="3" placeholder="Er der yderligere information?"></textarea>
-                    <span th:if="${#fields.hasErrors('furtherInformation')}" th:errors="*{furtherInformation}">Fejl i yderligere information></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <button type="submit" class="btn btn-primary">Opret</button>
                 </div>
             </div>
         </form>
