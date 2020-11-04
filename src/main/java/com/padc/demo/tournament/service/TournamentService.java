@@ -15,10 +15,11 @@ import java.util.Optional;
 @Service
 public class TournamentService implements IService<Tournament>
 {
+    @Autowired
     private final ITournamentRepository iTournamentRepository;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
-    @Autowired
+
     public TournamentService(ITournamentRepository iTournamentRepository)
     {
         this.iTournamentRepository = iTournamentRepository;

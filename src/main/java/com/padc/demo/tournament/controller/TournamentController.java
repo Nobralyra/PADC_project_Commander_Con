@@ -10,19 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class TournamentController
 {
+    @Autowired
     private final IService<Tournament> iTournamentService;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
-    @Autowired
+
     public TournamentController(IService<Tournament> iTournamentService)
     {
         this.iTournamentService = iTournamentService;
     }
 
-    @GetMapping({"/turnering"})
+    @GetMapping("/turnering")
     public String tournamentPage(Model model)
     {
         //model.addAttribute("tournament", iTournamentService.findAll());
@@ -33,15 +36,26 @@ public class TournamentController
     @GetMapping("/turnering/opret_turnering")
     public String showCreateTournament(Tournament tournament, Model model)
     {
-        model.addAttribute("tournament");
+        model.addAttribute("tournament", tournament);
 
         return "/turnering/opret_turnering";
     }
 
     @PostMapping("/turnering/opret_turnering")
-    public String createTournament(@ModelAttribute("tournament") Tournament tournament, BindingResult bindingResult, Model model)
+    public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {
+        if(!bindingResult.hasErrors())
+        {
+            iTournamentService.save(tournament);
+        }
+        else
+        {
+            System.err.println(bindingResult);
+            model.addAttribute("bindingResult", bindingResult);
+            model.addAttribute("tournament", tournament);
 
-        return "redirect:/";
+            return "/turnering/opret_turnering";
+        }
+        return "redirect:/turnering/opret_turnering";
     }
 }

@@ -1,10 +1,11 @@
 package com.padc.demo.tournament.domain;
 
 import com.padc.demo.core.Audition;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,13 +15,17 @@ public class Tournament extends Audition
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tournamentId;
+    private long tournamentId;
 
-    @NotBlank(message = "Indtast venligst turnerningsnavnet")
+    @NotBlank(message = "Skal udfyldes")
     private String tournamentName;
 
-    @CreationTimestamp
-    //@Column(updatable = false)
+    /**
+     * https://stackoverflow.com/questions/45629318/spring-with-thymeleaf-binding-date-in-html-form
+     * Man skal bruge LocalDateTime og så formatere
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @NotNull(message = "Skal udfyldes")
     private LocalDateTime dateAndTime;
 
     private String place;
@@ -35,12 +40,28 @@ public class Tournament extends Audition
     @Column(table = "tournament_type_info")
     private String furtherInformation;
 
-    public Long getTournamentId()
+    public Tournament()
+    {
+
+    }
+
+    public Tournament(long tournamentId, @NotBlank(message = "Indtast venligst turnerningsnavnet") String tournamentName, @NotNull LocalDateTime dateAndTime, String place, String tournamentType, String pointsType, String furtherInformation)
+    {
+        this.tournamentId = tournamentId;
+        this.tournamentName = tournamentName;
+        this.dateAndTime = dateAndTime;
+        this.place = place;
+        this.tournamentType = tournamentType;
+        this.pointsType = pointsType;
+        this.furtherInformation = furtherInformation;
+    }
+
+    public long getTournamentId()
     {
         return tournamentId;
     }
 
-    public void setTournamentId(Long tournamentId)
+    public void setTournamentId(long tournamentId)
     {
         this.tournamentId = tournamentId;
     }
