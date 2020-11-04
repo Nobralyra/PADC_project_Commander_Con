@@ -35,8 +35,6 @@ public class Tournament extends Audition
     @Column(table = "tournament_type_info")
     private String furtherInformation;
 
-
-
     public Long getTournamentId()
     {
         return tournamentId;
