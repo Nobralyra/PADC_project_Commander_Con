@@ -14,20 +14,20 @@
                 </div>
 
                 <div class="form-group col-md-6" >
-                    <label for="TournamentName">Turneringsnavn</label>
-                    <input type="text" name="tournamentName" id="TournamentName" class="form-control" placeholder="Navn" required="required" th:field="*{tournamentName}">
+                    <label>Turneringsnavn</label>
+                    <input type="text" class="form-control" placeholder="Navn" required="required" th:field="*{tournamentName}">
                     <span th:if="${#fields.hasErrors('tournamentName')}" th:errors="*{tournamentName}"></span>
                 </div>
 
                 <div class="form-group col-md-6" >
-                    <label for="DateAndTime">Dato og tid</label>
-                    <input type="datetime-local" name="dateAndTime" id="DateAndTime" class="form-control" placeholder="Dato og tid" required="required" th:field="*{dateAndTime}">
+                    <label>Dato og tid</label>
+                    <input type="datetime-local" class="form-control" placeholder="Dato og tid" required="required" th:field="*{dateAndTime}">
                     <span th:if="${#fields.hasErrors('dateAndTime')}" th:errors="*{dateAndTime}"></span>
                 </div>
 
                 <div class="form-group col-md-6" >
-                    <label for="Place">Sted</label>
-                    <input type="text" name="place" id="Place" class="form-control" placeholder="Sted" th:field="*{place}">
+                    <label>Sted</label>
+                    <input type="text" class="form-control" placeholder="Sted" th:field="*{place}">
                 </div>
 
                 <div class="form-group col-md-6" >
@@ -35,17 +35,17 @@
                     <div class="checkbox-inline">
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="cEDHTournamentType" name="CEDHTournamentType" class="custom-control-input" th:value="cEDH" th:field="*{tournamentType}">
+                            <input type="checkbox" id="cEDHTournamentType"  class="custom-control-input" th:value="cEDH" th:field="*{tournamentType}">
                             <label class="custom-control-label" for="cEDHTournamentType">cEDH</label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="eDHTournamentType" name="EDHTournamentType" class="custom-control-input" th:value="EDH" th:field="*{tournamentType}">
+                            <input type="checkbox" id="eDHTournamentType" class="custom-control-input" th:value="EDH" th:field="*{tournamentType}">
                             <label class="custom-control-label" for="eDHTournamentType">EDH</label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="andetTournamentType" name="AndetTournamentType" class="custom-control-input" th:value="Andet" th:field="*{tournamentType}">
+                            <input type="checkbox" id="andetTournamentType" class="custom-control-input" th:value="Andet" th:field="*{tournamentType}">
                             <label class="custom-control-label" for="andetTournamentType">Andet</label>
                         </div>
 
@@ -59,22 +59,22 @@
                     <div class="checkbox-inline">
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="elimineringPointsType" name="ElimineringPointsType" class="custom-control-input" th:value="Eliminering" th:field="*{pointsType}">
+                            <input type="checkbox" id="elimineringPointsType" class="custom-control-input" th:value="Eliminering" th:field="*{pointsType}">
                             <label class="custom-control-label" for="elimineringPointsType">Eliminering</label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="pointPointsType" name="PointPointsType" class="custom-control-input" th:value="Point" th:field="*{pointsType}">
+                            <input type="checkbox" id="pointPointsType" class="custom-control-input" th:value="Point" th:field="*{pointsType}">
                             <label class="custom-control-label" for="pointPointsType">Point</label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="MilestonePointsType" name="milestonePointsType" class="custom-control-input" th:value="Milestone" th:field="*{pointsType}">
+                            <input type="checkbox" id="MilestonePointsType" class="custom-control-input" th:value="Milestone" th:field="*{pointsType}">
                             <label class="custom-control-label" for="MilestonePointsType">Milestone</label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="andetPointsType" name="AndetPointsType" class="custom-control-input" th:value="Andet" th:field="*{pointsType}">
+                            <input type="checkbox" id="andetPointsType" class="custom-control-input" th:value="Andet" th:field="*{pointsType}">
                             <label class="custom-control-label" for="andetPointsType">Andet</label>
                         </div>
 
@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="FurtherInformation">Yderligere information</label>
-                    <textarea input th:field="*{furtherInformation}" class="form-control" id="FurtherInformation" rows="3" placeholder="Er der yderligere information?"></textarea>
+                    <label>Yderligere information</label>
+                    <textarea input th:field="*{furtherInformation}" class="form-control" rows="3" placeholder="Er der yderligere information?"></textarea>
                 </div>
 
                 <div class="form-group col-md-6">
