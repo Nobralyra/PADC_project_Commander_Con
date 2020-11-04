@@ -6,6 +6,66 @@
 </head>
 <body>
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
+    <section>
+        <div class="col-auto">
+
+            <div class="col-md-6">
+                <h1>Turneringsinformation</h1>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p hidden th:text="${tournament.tournamentId}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Turneringsnavn</label>
+                        </div>
+                        <div class="col">
+                            <p th:text="${'Turneringsnavn: ' + tournament.tournamentName}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Dato og tid</label>
+                        </div>
+                        <div class="col">
+                            <p th:text="${tournament.dateAndTime}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Sted</label>
+                        </div>
+                        <div class="col">
+                            <p th:text="${tournament.place}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Sted</label>
+                        </div>
+                        <div class="col">
+                            <p th:text="${tournament.place}"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
 
     <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
