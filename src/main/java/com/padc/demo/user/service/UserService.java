@@ -3,6 +3,7 @@ package com.padc.demo.user.service;
 import com.padc.demo.core.IService;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.repository.IUserRepository;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,14 +25,22 @@ public class UserService implements IService<User> {
     }
 
     @Override
-    public Optional<User> findById(long id) {
+    public Optional<User> findById(long id) throws NotFoundException {
         try{
+            return iUserRepository.findById(id);
+        }catch (IllegalArgumentException ia)
+        {
+            throw new NotFoundException("Not found");
+        }
+    }
+
+        /*try{
             return iUserRepository.findById(id);
         }catch (IllegalArgumentException ia){
             System.out.println(ia);
             return Optional.empty();
-        }
-    }
+        }*/
+
 
     @Override
     public List<User> findAll() {

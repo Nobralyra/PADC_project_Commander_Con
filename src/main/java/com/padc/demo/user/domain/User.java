@@ -10,6 +10,9 @@ import javax.validation.constraints.NotBlank;
 @SecondaryTable(name="login_info")
 public class User extends Audition {
 
+    //Databasen: når jeg vil slette en user, skla jeg først slette contact_info og login_info
+    //fordi user er parent til dem.
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
