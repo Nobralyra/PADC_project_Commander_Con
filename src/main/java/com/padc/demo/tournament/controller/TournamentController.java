@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TournamentController
 {
-    private final IService iTournamentService;
+    private final IService<Tournament> iTournamentService;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
     @Autowired
-    public TournamentController(IService iTournamentService)
+    public TournamentController(IService<Tournament> iTournamentService)
     {
         this.iTournamentService = iTournamentService;
     }
