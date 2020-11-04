@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Opret bruger</title>
+</head>
+<body>
+<header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+<form action="#" th:action="@{/bruger/opret_bruger}" th:object="${user}" method="post">
+    <div class="col-auto">
+
+        <div class="col-md-6">
+            <h1>Opret en ny bruger</h1>
+        </div>
+
+        <input type=hidden th:field="*{userId}" >
+
+        <div class="form-group col-md-6" >
+            <label for="Fornavn">Fornavn:</label>
+            <input type="text" name="firstName" id="Fornavn" class="form-control" placeholder="Dit fornavn" th:field="*{firstName}" required>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="Efternavn">Efternavn:</label>
+            <input type="text" name="lastName" id="Efternavn" class="form-control" placeholder="Dit efternavn" th:field="*{lastName}" required>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="E-mail">E-mail:</label>
+            <input type="text" name="emailAddress" id="E-mail" class="form-control" placeholder="Din e-mail" th:field="*{emailAddress}">
+            <span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="Telefonnummer">Telefonnummer:</label>
+            <input type="text" name="phoneNumber" id="Telefonnummer" class="form-control" placeholder="Dit telefonnummer" th:field="*{phoneNumber}">
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="Brugernavn">Brugernavn:</label>
+            <input type="text" name="userName" id="Brugernavn" class="form-control" placeholder="Vælg et brugernavn" th:field="*{userName}">
+            <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="Kodeord">Kodeord:</label>
+            <input type="text" name="password" id="Kodeord" class="form-control" placeholder="Vælg et kodeord" th:field="*{password}">
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <div class="form-group col-md-6" >
+            <label for="Bekræft kodeord">Bekræft dit kodeord:</label>
+            <input type="text" name="password2" id="Bekræft kodeord" class="form-control" placeholder="Skriv dit kodeord igen">
+        </div>
+
+
+    </div>
+    <button type="submit">Opret</button>
+</form>
+
+<footer th:replace="fragments/footer :: footerElement"></footer>
+</body>
+</html>

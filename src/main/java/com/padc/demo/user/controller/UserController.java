@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -19,22 +20,23 @@ public class UserController {
         this.iService = iService;
     }
 
-    @GetMapping("/user/opret_bruger")
+    @GetMapping("/bruger/opret_bruger")
     public String showCreateUser(User user, Model model){
+        String password2 = "";
         model.addAttribute("user", user);
-        return "/user/opret_bruger";
+        model.addAttribute("password2", password2);
+        return "/bruger/opret_bruger";
     }
 
-    @PostMapping("opret_bruger")
+    @PostMapping("/bruger/opret_bruger")
     public String createUser(@Valid User user, BindingResult b, Model model){
         if(b.hasErrors()){
-            model.addAttribute("user", user);
-            return "/user/opret_bruger";
+            model.addAttribute("bindingResult", b);
+            return "/bruger/opret_bruger";
         }
         iService.save(user);
         //vi mangler forsiden, så denne fører ikke til noget endnu
-        return "redirect:/bruger_side";
+        return "redirect:/forsider/menu_deltager";
     }
-
 
 }
