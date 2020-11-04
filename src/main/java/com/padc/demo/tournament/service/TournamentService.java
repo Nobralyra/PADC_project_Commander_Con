@@ -1,12 +1,10 @@
 package com.padc.demo.tournament.service;
 
 import com.padc.demo.core.IService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.padc.demo.tournament.domain.Tournament;
 import com.padc.demo.tournament.repository.ITournamentRepository;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
