@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Opret bruger</title>
+</head>
+<body>
+<header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+<form action="#" th:action="@{/user/opret_bruger}" th:object="${user}" method="post">
+    <div class="col-auto">
+
+        <div class="col-md-6">
+            <h1>Opret en ny bruger</h1>
+        </div>
+
+        <input type=hidden th:field="*{userId}" >
+
+        <div class="form-group col-md-6" >
+            <label for="Fornavn">Fornavn:</label>
+            <input type="text" name="firstName" id="Fornavn" class="form-control" placeholder="dit fornavn" th:field="*{firstName}" required>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label for="Efternavn">Efternavn:</label>
+            <input type="text" name="lastName" id="Efternavn" class="form-control" placeholder="dit efternavn" th:field="*{lastName}" required>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        </div>
+    </div>
+    <button type="submit">Opret</button>
+</form>
+
+<footer th:replace="fragments/footer :: footerElement"></footer>
+</body>
+</html>
