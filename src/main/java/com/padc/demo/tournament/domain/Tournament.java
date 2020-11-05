@@ -22,7 +22,8 @@ public class Tournament extends Audition
 
     /**
      * https://stackoverflow.com/questions/45629318/spring-with-thymeleaf-binding-date-in-html-form
-     * Man skal bruge LocalDateTime og så formatere
+     * Should use LocalDateTime so the HTML datatime_local can get saved in the field. The also gets annotateret with
+     * @DateTimeFormat so the LocalDateTime accepts the ISO 8601
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "Skal udfyldes")

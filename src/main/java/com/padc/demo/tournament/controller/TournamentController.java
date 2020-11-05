@@ -44,6 +44,19 @@ public class TournamentController
         return "/turnering/opret_turnering";
     }
 
+    /**
+     * Checks if the input id valid or not.
+     * If it is valid, then the data gets saved in the database, and should redirect back to
+     * administration site (does not exist yet).
+     * If it is not valid, then print out the error in the standard error stream,
+     * sends the error back to the HTML (what is written in the annotation over the fields in Tournament),
+     * sends the data that was in the form back to the HTML,
+     * and redirect to the showCreateTournament method
+     * @param tournament
+     * @param bindingResult
+     * @param model
+     * @return String
+     */
     @PostMapping("/turnering/opret_turnering")
     public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {
