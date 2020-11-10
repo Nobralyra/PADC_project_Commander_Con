@@ -8,7 +8,6 @@ import com.padc.demo.tournament.repository.ITournamentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TournamentService implements IService<Tournament>
@@ -30,17 +29,15 @@ public class TournamentService implements IService<Tournament>
     }
 
     @Override
-    public Optional<Tournament> findById(long id)
+    public Tournament findById(long id)
     {
-        try
-        {
-            return iTournamentRepository.findById(id);
-        }
-        catch (IllegalArgumentException illegalArgumentException)
+        try{
+            return iTournamentRepository.findById(id).orElse(null);
+        }catch (IllegalArgumentException illegalArgumentException)
         {
             illegalArgumentException.printStackTrace(); // Goes to System.err
             illegalArgumentException.printStackTrace(System.out);
-            return Optional.empty();
+            return null;
         }
     }
 
