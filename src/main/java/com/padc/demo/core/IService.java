@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IService<E>
 {
     void save(E element);
-    Optional<E> findById(long id) throws NotFoundException;
+    E findById(long id);
     List<E> findAll();
     void deleteByID(long id);
 }

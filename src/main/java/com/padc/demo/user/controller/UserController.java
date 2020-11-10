@@ -53,14 +53,10 @@ public class UserController {
     */
     @GetMapping("/bruger/bruger_side/{id}")
     public String showUser(@PathVariable("id") long id, Model model) {
-        try {
-            Optional<User> user = iService.findById(id);
-            if (user.isPresent()) {
-                model.addAttribute("user", user.get());
-                return "/bruger/bruger_side";
-            }
-        } catch (NotFoundException ne) {
-            System.out.println(Arrays.toString(ne.getStackTrace()));
+        User user = iService.findById(id);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "/bruger/bruger_side";
         }
         return "/forsider/menu_deltager";
     }

@@ -4,6 +4,7 @@ import com.padc.demo.core.IService;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.repository.IUserRepository;
 import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,32 +16,32 @@ public class UserService implements IService<User> {
 
     private final IUserRepository iUserRepository;
 
-    public UserService(IUserRepository iUserRepository) {
+    //test - hvis ikke virker, brug autowired
+    private final Encoder encoder;
+
+    public UserService(IUserRepository iUserRepository, Encoder encoder) {
         this.iUserRepository = iUserRepository;
+        this.encoder = encoder;
     }
 
     @Override
     public void save(User user) {
+
+        user.setPassword(encoder.getEncoder().encode(user.getPassword()));
         iUserRepository.save(user);
     }
 
     @Override
-    public Optional<User> findById(long id) throws NotFoundException {
+    public User findById(long id){
         try{
-            return iUserRepository.findById(id);
-        }catch (IllegalArgumentException ia)
+            return iUserRepository.findById(id).orElse(null);
+        }catch (IllegalArgumentException illegalArgumentException)
         {
-            throw new NotFoundException("Not found");
+            illegalArgumentException.printStackTrace(); // Goes to System.err
+            illegalArgumentException.printStackTrace(System.out);
+            return null;
         }
     }
-
-        /*try{
-            return iUserRepository.findById(id);
-        }catch (IllegalArgumentException ia){
-            System.out.println(ia);
-            return Optional.empty();
-        }*/
-
 
     @Override
     public List<User> findAll() {

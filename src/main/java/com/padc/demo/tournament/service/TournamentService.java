@@ -1,6 +1,7 @@
 package com.padc.demo.tournament.service;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.user.domain.User;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,17 +33,15 @@ public class TournamentService implements IService<Tournament>
     }
 
     @Override
-    public Optional<Tournament> findById(long id)
-    {
-        try
-        {
-            return iTournamentRepository.findById(id);
-        }
-        catch (IllegalArgumentException illegalArgumentException)
+
+    public Tournament findById(long id){
+        try{
+            return iTournamentRepository.findById(id).orElse(null);
+        }catch (IllegalArgumentException illegalArgumentException)
         {
             illegalArgumentException.printStackTrace(); // Goes to System.err
             illegalArgumentException.printStackTrace(System.out);
-            return Optional.empty();
+            return null;
         }
     }
 
