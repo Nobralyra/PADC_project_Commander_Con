@@ -2,6 +2,7 @@ package com.padc.demo.tournament.controller;
 
 import com.padc.demo.core.IService;
 import com.padc.demo.tournament.domain.Tournament;
+import com.padc.demo.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,11 @@ public class TournamentController
     public String tournamentPage(@PathVariable("id") long id, Model model)
     {
         Tournament tournament = iTournamentService.findById(id);
-        model.addAttribute("tournament", tournament);
+        if (tournament != null)
+        {
+            model.addAttribute("tournament", tournament);
+            return ("/turnering/turnering_side");
+        }
 
         return ("/turnering/turnering_side");
     }
