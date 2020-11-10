@@ -1,9 +1,6 @@
 package com.padc.demo.core;
 
-import javassist.NotFoundException;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface IService<E>
 {
