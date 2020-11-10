@@ -15,8 +15,6 @@ import java.util.Optional;
 public class UserService implements IService<User> {
 
     private final IUserRepository iUserRepository;
-
-    //test - hvis ikke virker, brug autowired
     private final Encoder encoder;
 
     public UserService(IUserRepository iUserRepository, Encoder encoder) {

@@ -2,15 +2,12 @@ package com.padc.demo.user.controller;
 
 import com.padc.demo.core.IService;
 import com.padc.demo.user.domain.User;
-import javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -27,7 +24,6 @@ public class UserController {
         return "/bruger/opret_bruger";
     }
 
-    //RequestParam giver bekræftelse af, at brugeren skriver den samme kode to gange
     @PostMapping("/bruger/opret_bruger")
     public String createUser(@RequestParam String password2, @Valid User user, BindingResult bindingResult, Model model){
 
@@ -44,13 +40,7 @@ public class UserController {
         long id = user.getUserId();
         return "redirect:/bruger/bruger_side/" + id;
     }
-    /*user story 2: når man er lukket ind, kan man gå ind på sin profil.
-     userId kommer fra login, men det har vi ikke implementeret endnu.
-     Så her bliver jeg efter oprettelsen sendt til en side, hvor jeg kan se
-     den profil, jeg lige har oprettet.
-     Så nu kan jeg ikke lave min profil-side, fordi vi skulle bruge
-     brugerid fra login.
-    */
+
     @GetMapping("/bruger/bruger_side/{id}")
     public String showUser(@PathVariable("id") long id, Model model) {
         User user = iService.findById(id);
