@@ -1,6 +1,6 @@
 package com.padc.demo.tournament.domain;
 
-import com.padc.demo.core.Audition;
+import com.padc.demo.core.Auditing.Audition;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
