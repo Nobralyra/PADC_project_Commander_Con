@@ -34,7 +34,8 @@ public class UserService implements IService<User> {
     @Override
     public User findById(long id){
         Optional<User> user = iUserRepository.findById(id);
-
+        /*The double colon operator :: is used to call a method/constructor
+        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return user.orElseThrow(EntityNotFoundException::new);
     }
 

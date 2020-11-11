@@ -1,4 +1,4 @@
-package com.padc.demo.core.Auditing;
+package com.padc.demo.core.auditing;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
