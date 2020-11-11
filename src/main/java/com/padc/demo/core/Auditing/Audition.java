@@ -1,4 +1,4 @@
-package com.padc.demo.core;
+package com.padc.demo.core.Auditing;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
