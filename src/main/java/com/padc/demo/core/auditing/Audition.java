@@ -1,4 +1,4 @@
-package com.padc.demo.core.Auditing;
+package com.padc.demo.core.auditing;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,7 +12,8 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
- * https://docs.spring.io/spring-data/jpa/docs/1.7.0.DATAJPA-580-SNAPSHOT/reference/html/auditing.html
+ * Guides how to setup auditing with JPA in the project:
+ * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#auditing
  * http://progressivecoder.com/spring-boot-jpa-auditing-example-with-auditoraware-interface/
  * https://rashidi.github.io/spring-boot-data-audit/
  * https://devkonline.com/tutorials/content/jpa-auditing-springboot
