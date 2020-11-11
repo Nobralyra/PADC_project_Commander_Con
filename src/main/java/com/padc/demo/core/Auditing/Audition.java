@@ -11,16 +11,23 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
+/**
+ * https://docs.spring.io/spring-data/jpa/docs/1.7.0.DATAJPA-580-SNAPSHOT/reference/html/auditing.html
+ * http://progressivecoder.com/spring-boot-jpa-auditing-example-with-auditoraware-interface/
+ * https://rashidi.github.io/spring-boot-data-audit/
+ * https://devkonline.com/tutorials/content/jpa-auditing-springboot
+ *
+ */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class Audition
 {
     @CreatedBy
-    @Column(name = "created_by")
+    @Column(name = "created_by", nullable = false, updatable = false)
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false, updatable = false)
     private Date createdDate;
 
     @LastModifiedBy
