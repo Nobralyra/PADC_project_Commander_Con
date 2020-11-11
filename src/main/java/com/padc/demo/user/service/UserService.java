@@ -1,12 +1,14 @@
 package com.padc.demo.user.service;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.tournament.domain.Tournament;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.repository.IUserRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,14 +33,9 @@ public class UserService implements IService<User> {
 
     @Override
     public User findById(long id){
-        try{
-            return iUserRepository.findById(id).orElse(null);
-        }catch (IllegalArgumentException illegalArgumentException)
-        {
-            illegalArgumentException.printStackTrace(); // Goes to System.err
-            illegalArgumentException.printStackTrace(System.out);
-            return null;
-        }
+        Optional<User> user = iUserRepository.findById(id);
+
+        return user.orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

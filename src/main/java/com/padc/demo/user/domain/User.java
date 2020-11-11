@@ -1,6 +1,6 @@
 package com.padc.demo.user.domain;
 
-import com.padc.demo.core.Audition;
+import com.padc.demo.core.Auditing.Audition;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 

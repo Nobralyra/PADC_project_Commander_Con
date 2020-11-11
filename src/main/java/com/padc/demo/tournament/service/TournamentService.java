@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import com.padc.demo.tournament.domain.Tournament;
 import com.padc.demo.tournament.repository.ITournamentRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class TournamentService implements IService<Tournament>
@@ -31,14 +34,9 @@ public class TournamentService implements IService<Tournament>
     @Override
     public Tournament findById(long id)
     {
-        try{
-            return iTournamentRepository.findById(id).orElse(null);
-        }catch (IllegalArgumentException illegalArgumentException)
-        {
-            illegalArgumentException.printStackTrace(); // Goes to System.err
-            illegalArgumentException.printStackTrace(System.out);
-            return null;
-        }
+        Optional<Tournament> tournament = iTournamentRepository.findById(id);
+
+        return tournament.orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

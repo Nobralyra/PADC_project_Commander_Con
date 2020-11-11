@@ -1,12 +1,14 @@
 package com.padc.demo.user.controller;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.tournament.domain.Tournament;
 import com.padc.demo.user.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 @Controller
@@ -43,12 +45,19 @@ public class UserController {
 
     @GetMapping("/bruger/bruger_side/{id}")
     public String showUser(@PathVariable("id") long id, Model model) {
-        User user = iService.findById(id);
-        if (user != null) {
+
+        try
+        {
+            User user = iService.findById(id);
             model.addAttribute("user", user);
             return "/bruger/bruger_side";
         }
-        return "/forsider/menu_deltager";
+        catch (EntityNotFoundException entityNotFoundException)
+        {
+            entityNotFoundException.printStackTrace(); // Goes to System.err
+            entityNotFoundException.printStackTrace(System.out);
+            return "/forsider/menu_deltager";
+        }
     }
 
 }
