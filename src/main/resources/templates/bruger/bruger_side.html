@@ -7,11 +7,18 @@
 <body>
 <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
-<div class="form-group col-md-6" >
-    <span th:text="${user.firstName}" ></span>
-    <span th:text="${user.lastName}" ></span>
-</div>
+    <div class="col-auto">
 
+        <div class="col-md-6">
+            <h1>Ny bruger er oprettet </h1>
+        </div>
+
+        <div class="form-group col-md-6" >
+
+            <span th:text="${user.firstName}" ></span>
+            <span th:text="${user.lastName}" ></span>
+        </div>
+    </div>
 
 <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>

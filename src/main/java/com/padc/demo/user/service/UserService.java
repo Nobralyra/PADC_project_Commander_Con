@@ -17,8 +17,6 @@ import java.util.Optional;
 public class UserService implements IService<User> {
 
     private final IUserRepository iUserRepository;
-
-    //test - hvis ikke virker, brug autowired
     private final Encoder encoder;
 
     public UserService(IUserRepository iUserRepository, Encoder encoder) {
@@ -36,7 +34,8 @@ public class UserService implements IService<User> {
     @Override
     public User findById(long id){
         Optional<User> user = iUserRepository.findById(id);
-
+        /*The double colon operator :: is used to call a method/constructor
+        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return user.orElseThrow(EntityNotFoundException::new);
     }
 
