@@ -5,6 +5,7 @@
     <title>Opret bruger</title>
 </head>
 <body>
+<div class="container-fluid page">
 <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
 <form action="#" th:action="@{/bruger/opret_bruger}" th:object="${user}" method="post">
@@ -59,7 +60,7 @@
     <button type="submit" class="btn btn-primary">Opret</button>
     </div>
 </form>
-
+</div>
 <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
 </html>
