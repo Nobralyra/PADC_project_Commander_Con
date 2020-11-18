@@ -6,31 +6,32 @@
 </head>
 <body>
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
+    <section>
         <form th:action="@{/turnering/opret_turnering}" th:object="${tournament}" method="post">
             <div class="col-auto">
 
-                <div class="col-md-6">
+                <div class="col-sm">
                     <h1>Opret en ny turnering</h1>
                 </div>
 
-                <div class="form-group col-md-6" >
+                <div class="form-group col-sm-6" >
                     <label>Turneringsnavn</label>
                     <input type="text" class="form-control" placeholder="Navn" required="required" th:field="*{tournamentName}">
                     <span th:if="${#fields.hasErrors('tournamentName')}" th:errors="*{tournamentName}"></span>
                 </div>
 
-                <div class="form-group col-md-6" >
+                <div class="form-group col-sm-6" >
                     <label>Dato og tid</label>
                     <input type="datetime-local" class="form-control" placeholder="Dato og tid" required="required" th:field="*{dateAndTime}">
                     <span th:if="${#fields.hasErrors('dateAndTime')}" th:errors="*{dateAndTime}"></span>
                 </div>
 
-                <div class="form-group col-md-6" >
+                <div class="form-group col-sm-6" >
                     <label>Sted</label>
                     <input type="text" class="form-control" placeholder="Sted" th:field="*{place}">
                 </div>
 
-                <div class="form-group col-md-6" >
+                <div class="form-group col-sm-6" >
                     <label>Turneringstype</label>
                     <div class="checkbox-inline">
 
@@ -53,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
 
                     <label>Pointstype</label>
                     <div class="checkbox-inline">
@@ -82,16 +83,17 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
                     <label>Yderligere information</label>
                     <textarea input th:field="*{furtherInformation}" class="form-control" rows="3" placeholder="Er der yderligere information?"></textarea>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
                     <button type="submit" class="btn btn-primary">Opret</button>
                 </div>
             </div>
         </form>
+    </section>
 
     <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
