@@ -10,4 +10,6 @@ public class HomeController {
     public String show_menu_deltager(){
         return "/forsider/menu_deltager";
     }
+
+
 }
