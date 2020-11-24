@@ -3,6 +3,7 @@ package com.padc.demo.tournament.controller;
 import com.padc.demo.core.IService;
 import com.padc.demo.tournament.domain.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ public class TournamentController
         this.iTournamentService = iTournamentService;
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/turnering/turnering_side/{id}")
     public String tournamentPage(@PathVariable("id") long id, Model model)
     {
@@ -55,6 +57,7 @@ public class TournamentController
          */
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/turnering/opret_turnering")
     public String showCreateTournament(Tournament tournament, Model model)
     {
@@ -76,6 +79,7 @@ public class TournamentController
      * @param model
      * @return String
      */
+    @Secured("ROLE_ADMIN")
     @PostMapping("/turnering/opret_turnering")
     public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {

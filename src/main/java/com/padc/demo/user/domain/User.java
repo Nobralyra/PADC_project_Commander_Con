@@ -1,21 +1,38 @@
 package com.padc.demo.user.domain;
 
 import com.padc.demo.core.auditing.Audition;
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+
+//https://github.com/springframeworkguru/ssc-brewery/blob/db-project-lombok/src/main/java/guru/sfg/brewery/domain/security/User.java
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name="user")
 @SecondaryTable(name="contact_info")
-@SecondaryTable(name="login_info")
+//@SecondaryTable(name="login_info")
 public class User extends Audition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
+
+    //ved ikke, om de virker i deres egen tabel
+    private String username;
+    private String password;
+
+    //kun en rolle i dette system
+    private Role role;
 
     @NotBlank(message = "Indtast venligst fornavn")
     private String firstName;
+
     @NotBlank(message = "Indtast venligst efternavn")
     private String lastName;
 
@@ -25,38 +42,15 @@ public class User extends Audition {
     @Column(table ="contact_info")
     private String phoneNumber;
 
+    /*
+    //jeg kan senere prøve at have disse i sin egen entity
     @Column(table = "login_info")
     private String userName;
 
     @Column(table = "login_info")
-    private String password;
+    private String password;*/
 
-    public User(){}
 
-    public Long getUserId() {
-        return userId;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getEmailAddress() { return emailAddress; }
-    public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+
+
 }

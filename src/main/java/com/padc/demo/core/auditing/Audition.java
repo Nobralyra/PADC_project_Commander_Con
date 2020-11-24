@@ -23,6 +23,9 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Audition
 {
+
+    //prøvede at ændre createdBy til User, men skal være string (så kunne man hente navnet og gemme i databasen)
+
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
     private String createdBy;
