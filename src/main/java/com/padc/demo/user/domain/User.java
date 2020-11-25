@@ -1,8 +1,11 @@
 package com.padc.demo.user.domain;
 
 import com.padc.demo.core.auditing.Audition;
+import com.padc.demo.deck.domain.Deck;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -30,6 +33,12 @@ public class User extends Audition {
 
     @Column(table = "login_info")
     private String password;
+
+//    //mappedby is the tablename
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "company")
+//    private List<Deck> listOfDecks;
 
     public User(){}
 
