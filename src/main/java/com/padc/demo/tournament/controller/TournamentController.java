@@ -16,11 +16,10 @@ import javax.validation.Valid;
 @Controller
 public class TournamentController
 {
-    @Autowired
     private final IService<Tournament> iTournamentService;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
-
+    @Autowired
     public TournamentController(IService<Tournament> iTournamentService)
     {
         this.iTournamentService = iTournamentService;
