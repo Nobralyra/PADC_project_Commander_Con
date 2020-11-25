@@ -9,17 +9,16 @@ import com.padc.demo.tournament.repository.ITournamentRepository;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class TournamentService implements IService<Tournament>
 {
-    @Autowired
+
     private final ITournamentRepository iTournamentRepository;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
-
+    @Autowired
     public TournamentService(ITournamentRepository iTournamentRepository)
     {
         this.iTournamentRepository = iTournamentRepository;
@@ -31,11 +30,21 @@ public class TournamentService implements IService<Tournament>
         iTournamentRepository.save(element);
     }
 
+    /**
+     * Returns the Deck that matches the id that was given, but if the database didn't have a match,
+     * then throw a EntityNotFoundException that can be catches later.
+     * Optional takes care of not give a NullPointerException, because the return maybe non-null value
+     * from the database is in the Optional container.
+     * @param id
+     * @return Tournament
+     */
     @Override
     public Tournament findById(long id)
     {
         Optional<Tournament> tournament = iTournamentRepository.findById(id);
 
+        /*The double colon operator :: is used to call a method/constructor
+        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return tournament.orElseThrow(EntityNotFoundException::new);
     }
 
