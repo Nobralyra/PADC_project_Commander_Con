@@ -26,7 +26,7 @@ public class TournamentController
         this.iTournamentService = iTournamentService;
     }
 
-    @Secured("ROLE_ORGANIZER")
+    @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @GetMapping("/turnering/turnering_side/{id}")
     public String tournamentPage(@PathVariable("id") long id, Model model)
     {
@@ -56,7 +56,7 @@ public class TournamentController
          */
     }
 
-    @Secured("ROLE_ORGANIZER")
+    @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @GetMapping("/turnering/opret_turnering")
     public String showCreateTournament(Tournament tournament, Model model)
     {
@@ -78,7 +78,7 @@ public class TournamentController
      * @param model
      * @return String
      */
-    @Secured("ROLE_ORGANIZER")
+    @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @PostMapping("/turnering/opret_turnering")
     public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {
