@@ -6,68 +6,44 @@
 </head>
 <body>
 <div class="container-fluid page">
+
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
-    <section>
-        <div class="col-auto">
 
-            <div class="col-sm-8">
-                <h1>Turneringsinformation</h1>
-            </div>
+    <section class="col-auto">
 
-            <div class="col-sm-8">
+        <div class="col-sm">
+            <h1>Mine decks</h1>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <p hidden th:text="${tournament.tournamentId}"></p>
-                        </div>
-                    </div>
+            <a class="btn btn-primary" th:href="@{/turnering/opret_turnering}" role="button">Opret turnering</a>
 
-                    <div class="row">
-                        <div class="col">
-                            <label>Turneringsnavn</label>
-                        </div>
-                        <div class="col">
-                            <p th:text="${'Turneringsnavn: ' + tournament.tournamentName}"></p>
-                        </div>
-                    </div>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th hidden>Id</th>
+                    <th>Turneringsnavn</th>
+                    <th>Dato og tid</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
 
-                    <div class="row">
-                        <div class="col">
-                            <label>Dato og tid</label>
-                        </div>
-                        <div class="col">
-                            <p th:text="${tournament.dateAndTime}"></p>
-                        </div>
-                    </div>
+                <tr th:each="Tournament : ${tournament}">
+                    <td hidden th:text="${Tournament.tournamentId}"></td>
+                    <td th:text="${Tournament.tournamentName}"></td>
+                    <!-- https://www.baeldung.com/dates-in-thymeleaf -->
+                    <td th:text="${#temporals.format(Tournament.dateAndTime, 'dd-MM-yy HH:mm')}"></td>
 
-                    <div class="row">
-                        <div class="col">
-                            <label>Sted</label>
-                        </div>
-                        <div class="col">
-                            <p th:text="${tournament.place}"></p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label>Sted</label>
-                        </div>
-                        <div class="col">
-                            <p th:text="${tournament.place}"></p>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/turnering/opdater_deck/' + ${Tournament.tournamentId}}" role="button">Opdater</a>
+                        <a class="btn btn-primary" th:href="@{'/turnering/slet_deck/' + ${Tournament.tournamentId}}"
+                           role="button">Slet</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </section>
-
 </div>
-    <footer th:replace="fragments/footer :: footerElement"></footer>
+<footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
 </html>
