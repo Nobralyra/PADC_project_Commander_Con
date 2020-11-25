@@ -3,6 +3,8 @@ package com.padc.demo.user.domain;
 import com.padc.demo.core.auditing.Audition;
 import lombok.*;
 
+import com.padc.demo.deck.domain.Deck;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;

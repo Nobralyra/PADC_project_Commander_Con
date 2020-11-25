@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Deck</title>
+</head>
+<body>
+
+    <div class="container-fluid page">
+
+        <header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+        <section class="col-auto">
+
+                <div class="col-sm">
+                    <h1>Mine decks</h1>
+
+                    <a class="btn btn-primary" th:href="@{/deck/opret_deck}" role="button">Registrerer nyt deck</a>
+
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th hidden>Id</th>
+                                <th>Commander</th>
+                                <th>Partner Commander</th>
+                                <th>Decknavn</th>
+                                <th>Deck type</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="Deck : ${deck}">
+                                <td hidden th:text="${Deck.deckId}"></td>
+                                <td th:text="${Deck.commanderName}"></td>
+                                <td th:text="${Deck.partnerCommanderName}"></td>
+                                <td th:text="${Deck.nameOfDeck}"></td>
+                                <td th:text="${Deck.deckType}"></td>
+
+
+                                <td>
+                                    <a class="btn btn-primary" th:href="@{'/deck/opdater_deck/' + ${Deck.deckId}}" role="button">Opdater</a>
+                                    <a class="btn btn-primary" th:href="@{'/deck/slet_deck/' + ${Deck.deckId}}" role="button">Slet</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </section>
+    </div>
+
+    <footer th:replace="fragments/footer :: footerElement"></footer>
+
+</body>
+</html>
