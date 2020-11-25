@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Registrerer deck</title>
+
+</head>
+<body>
+    <div class="container-fluid page">
+        <header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+        <section class="col-auto">
+            <form th:action="@{/deck/opret_deck}" th:object="${deck}" method="post">
+
+                    <div class="col-sm">
+                        <h1>Registrerer nyt deck</h1>
+                    </div>
+
+                    <div class="form-group col-sm-8" >
+                        <label>Commander</label>
+                        <input type="text" class="form-control" placeholder="Commander" th:id="commanderName" th:field="*{commanderName}">
+                        <span th:if="${#fields.hasErrors('commanderName')}" th:errors="*{commanderName}"></span>
+                    </div>
+
+                    <div class="form-group col-sm-8" >
+                        <label>Partner Commander</label>
+                        <input type="text" class="form-control" placeholder="Partner Commander"  th:field="*{partnerCommanderName}">
+                        <span th:if="${#fields.hasErrors('partnerCommanderName')}" th:errors="*{partnerCommanderName}"></span>
+                    </div>
+
+                    <div class="form-group col-sm-8" >
+                        <label>Navnet på decket</label>
+                        <input type="text" class="form-control" placeholder="Decknavn" th:field="*{nameOfDeck}">
+                        <span th:if="${#fields.hasErrors('nameOfDeck')}" th:errors="*{nameOfDeck}"></span>
+                    </div>
+
+                    <div class="form-group col-sm-8" >
+                        <label>Decktype</label>
+                        <div class="checkbox-inline">
+
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" id="cEDH"  class="custom-control-input" th:value="cEDH" th:field="*{deckType}">
+                                <label class="custom-control-label" for="cEDH">cEDH</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" id="eDH" class="custom-control-input" th:value="EDH" th:field="*{deckType}">
+                                <label class="custom-control-label" for="eDH">EDH</label>
+                            </div>
+
+                            <span th:if="${#fields.hasErrors('deckType')}" th:errors="*{deckType}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-8">
+                        <button type="submit" class="btn btn-primary">Gem</button>
+                    </div>
+
+            </form>
+        </section>
+    </div>
+    <footer th:replace="fragments/footer :: footerElement"></footer>
+</body>
+
+<script>
+    // Venter til alt HTML og Javascript er loaded
+    $(document).ready(function()
+    {
+        // autocomplete er en metode der laver en dropdown menu og har nogle forskellige parameter
+        // source - JSON fil - kan være hvad som helst. her er function bagefter, fordi man ønsker at få
+        // returneret et ajaxkald
+        $('#commanderName').autocomplete(
+            {
+            source: function(request, response)
+            {
+                console.dir(request);
+
+                // ajax laver selve connection og henter data fra externe API
+                $.ajax({
+                    url: 'https://api.magicthegathering.io/v1/cards',
+                    dataType: "json",
+                    data: {
+                        name: request.term,
+                        format: "Commander",
+                        supertypes: "Legendary",
+                        types: "Creature|Planeswalker",
+                        pageSize: 5,
+                        page: 1
+                    },
+                    // success - hvad skal der ske, hvis det gik godt
+                    success: function (data)
+                    {
+                        console.dir(data)
+
+                        // laver et nyt tomt array
+                        var commanderNameAPI = [];
+
+                        // looper igennem alle kortene
+                        data.cards.forEach(function (card)
+                        {
+                            // tager navnet fra hvert kort, og ligger i arrayet (samme som append)
+
+                            commanderNameAPI.push(card.name);
+
+                        });
+                        console.dir(commanderNameAPI);
+
+                        // returnere resultatet af arrayet tilbage til source (autocomplete)
+                        response(commanderNameAPI);
+                    }
+                });
+            },
+            minLength: 3
+    });
+    });
+
+</script>
+</html>

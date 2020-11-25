@@ -1,10 +1,10 @@
-package com.padc.demo.tournament.service;
+package com.padc.demo.deck.service;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.deck.domain.Deck;
+import com.padc.demo.deck.repository.IDeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.padc.demo.tournament.domain.Tournament;
-import com.padc.demo.tournament.repository.ITournamentRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -12,22 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TournamentService implements IService<Tournament>
+public class DeckService implements IService<Deck>
 {
-
-    private final ITournamentRepository iTournamentRepository;
+    private final IDeckRepository iDeckRepository;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
     @Autowired
-    public TournamentService(ITournamentRepository iTournamentRepository)
+    public DeckService(IDeckRepository iDeckRepository)
     {
-        this.iTournamentRepository = iTournamentRepository;
+        this.iDeckRepository = iDeckRepository;
     }
 
     @Override
-    public void save(Tournament element)
+    public void save(Deck element)
     {
-        iTournamentRepository.save(element);
+        iDeckRepository.save(element);
     }
 
     /**
@@ -36,33 +35,33 @@ public class TournamentService implements IService<Tournament>
      * Optional takes care of not give a NullPointerException, because the return maybe non-null value
      * from the database is in the Optional container.
      * @param id
-     * @return Tournament
+     * @return Deck
      */
     @Override
-    public Tournament findById(long id)
+    public Deck findById(long id)
     {
-        Optional<Tournament> tournament = iTournamentRepository.findById(id);
+        Optional<Deck> deck = iDeckRepository.findById(id);
 
         /*The double colon operator :: is used to call a method/constructor
         by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
-        return tournament.orElseThrow(EntityNotFoundException::new);
+        return deck.orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
-    public List<Tournament> findAll()
+    public List<Deck> findAll()
     {
-        List<Tournament> tournamentList = new ArrayList<>();
+        List<Deck> deckList = new ArrayList<>();
 
-        for (Tournament tournament: iTournamentRepository.findAll())
+        for (Deck deck: iDeckRepository.findAll())
         {
-            tournamentList.add(tournament);
+            deckList.add(deck);
         }
-        return tournamentList;
+        return deckList;
     }
 
     @Override
     public void deleteByID(long id)
     {
-        iTournamentRepository.deleteById(id);
+        iDeckRepository.deleteById(id);
     }
 }

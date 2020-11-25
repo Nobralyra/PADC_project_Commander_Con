@@ -3,8 +3,11 @@ package com.padc.demo.user.domain;
 import com.padc.demo.core.auditing.Audition;
 import lombok.*;
 
+import com.padc.demo.deck.domain.Deck;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 //https://github.com/springframeworkguru/ssc-brewery/blob/db-project-lombok/src/main/java/guru/sfg/brewery/domain/security/User.java
@@ -51,6 +54,13 @@ public class User extends Audition {
     private String password;*/
 
 
+//    //mappedby is the tablename
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            mappedBy = "company")
+//    private List<Deck> listOfDecks;
+
+    public User(){}
 
 
 }
