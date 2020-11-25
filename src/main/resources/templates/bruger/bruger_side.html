@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container-fluid page">
-<header th:replace="fragments/top_menu :: top_menuElement"></header>
+    <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
     <div class="col-auto">
 
@@ -14,10 +14,10 @@
             <h1>Ny bruger er oprettet </h1>
         </div>
 
-        <div class="form-group col-sm-8" >
+        <div class="form-group col-sm-8">
 
-            <span th:text="${user.firstName}" ></span>
-            <span th:text="${user.lastName}" ></span>
+            <span th:text="${user.firstName}"></span>
+            <span th:text="${user.lastName}"></span>
         </div>
     </div>
 </div>
