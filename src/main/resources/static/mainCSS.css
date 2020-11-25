@@ -1,12 +1,5 @@
 body {background: #EAEAEA;}
 
-.page{
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff;
-    padding-bottom: 50px;
-}
-
 .container-fluid{
     padding-right: 0px;
     padding-left: 0px;
@@ -16,3 +9,11 @@ h1{
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
+.page{
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding-bottom: 50px;
+}
+

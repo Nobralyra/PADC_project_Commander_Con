@@ -5,8 +5,10 @@
     <title>Opret bruger</title>
 </head>
 <body>
+
 <div class="container-fluid page">
-<header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+    <header th:replace="fragments/empty_top_menu :: empty_top_menuElement"></header>
 
 <form action="#" th:action="@{/bruger/opret_bruger}" th:object="${user}" method="post">
     <div class="col-auto">
@@ -16,41 +18,44 @@
         </div>
 
         <input type=hidden th:field="*{id}" >
+        <div class="form-group col-sm-8" >
+            <span th:text="${created}" ></span>
+        </div>
 
         <div class="form-group col-sm-8" >
-            <label for="Fornavn">Fornavn:</label>
+            <label for="Fornavn">Fornavn</label>
             <input type="text" id="Fornavn" class="form-control" placeholder="Dit fornavn" th:field="*{firstName}">
             <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         </div>
         <div class="form-group col-sm-8" >
-            <label for="Efternavn">Efternavn:</label>
+            <label for="Efternavn">Efternavn</label>
             <input type="text" id="Efternavn" class="form-control" placeholder="Dit efternavn" th:field="*{lastName}">
             <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
         <div class="form-group col-sm-8" >
-            <label for="E-mail">E-mail:</label>
+            <label for="E-mail">E-mail</label>
             <input type="text" id="E-mail" class="form-control" placeholder="Din e-mail" th:field="*{emailAddress}">
             <span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
         </div>
         <div class="form-group col-sm-8" >
-            <label for="Telefonnummer">Telefonnummer:</label>
+            <label for="Telefonnummer">Telefonnummer</label>
             <input type="text" id="Telefonnummer" class="form-control" placeholder="Dit telefonnummer" th:field="*{phoneNumber}">
             <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
         </div>
 
 
         <div class="form-group col-sm-8" >
-            <label for="Brugernavn">Brugernavn:</label>
+            <label for="Brugernavn">Brugernavn</label>
             <input type="text" id="Brugernavn" class="form-control" placeholder="Vælg et brugernavn" th:field="*{username}">
             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         </div>
         <div class="form-group col-sm-8" >
-            <label for="Kodeord">Kodeord:</label>
+            <label for="Kodeord">Kodeord</label>
             <input type="password" id="Kodeord" class="form-control" placeholder="Vælg et kodeord" th:field="*{password}">
             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         </div>
         <div class="form-group col-sm-8" >
-            <label for="Bekræft kodeord">Bekræft dit kodeord:</label>
+            <label for="Bekræft kodeord">Bekræft dit kodeord</label>
             <input type="password" th:name="password2" id="Bekræft kodeord" class="form-control" placeholder="Skriv dit kodeord igen">
             <span th:text="${kode_igen}" ></span>
         </div>
@@ -62,6 +67,7 @@
             <button type="submit" class="btn btn-primary">Opret</button>
         </div>
     </div>
+
 
 </form>
 </div>

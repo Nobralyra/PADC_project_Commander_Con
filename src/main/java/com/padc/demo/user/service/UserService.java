@@ -5,6 +5,7 @@ import com.padc.demo.core.security.SecurityConfig;
 import com.padc.demo.user.domain.Role;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.repository.IUserRepository;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

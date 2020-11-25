@@ -26,7 +26,7 @@ public class TournamentController
         this.iTournamentService = iTournamentService;
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ORGANIZER")
     @GetMapping("/turnering/turnering_side/{id}")
     public String tournamentPage(@PathVariable("id") long id, Model model)
     {
@@ -40,7 +40,7 @@ public class TournamentController
         {
             entityNotFoundException.printStackTrace(); // Goes to System.err
             entityNotFoundException.printStackTrace(System.out);
-            return "/forsider/menu_deltager";
+            return "/velkommen";
         }
 
         /**
@@ -56,7 +56,7 @@ public class TournamentController
          */
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ORGANIZER")
     @GetMapping("/turnering/opret_turnering")
     public String showCreateTournament(Tournament tournament, Model model)
     {
@@ -78,7 +78,7 @@ public class TournamentController
      * @param model
      * @return String
      */
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ORGANIZER")
     @PostMapping("/turnering/opret_turnering")
     public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {
@@ -94,6 +94,6 @@ public class TournamentController
 
             return "/turnering/opret_turnering";
         }
-        return "redirect:/turnering";
+        return "redirect:/velkommen";
     }
 }

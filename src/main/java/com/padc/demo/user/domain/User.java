@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name="user")
 @SecondaryTable(name="contact_info")
-//@SecondaryTable(name="login_info")
+@SecondaryTable(name="login_info")
 public class User extends Audition {
 
     @Id
@@ -27,7 +27,9 @@ public class User extends Audition {
     private Long id;
 
     //ved ikke, om de virker i deres egen tabel
+    @Column(table = "login_info")
     private String username;
+    @Column(table = "login_info")
     private String password;
 
     //kun en rolle i dette system
@@ -44,14 +46,6 @@ public class User extends Audition {
 
     @Column(table ="contact_info")
     private String phoneNumber;
-
-    /*
-    //jeg kan senere prøve at have disse i sin egen entity
-    @Column(table = "login_info")
-    private String userName;
-
-    @Column(table = "login_info")
-    private String password;*/
 
 
 //    //mappedby is the tablename
