@@ -2,19 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: headerElement">
     <meta charset="UTF-8">
-    <title>Registrerer deck</title>
+    <title>Opdater deck</title>
 </head>
 <body>
 
 <div class="container-fluid page">
+
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
     <section class="col-auto">
-        <form th:action="@{/deck/opret_deck}" th:object="${deck}" method="post">
+        <form th:action="@{/deck/opdater_deck}" th:object="${deck}" method="post">
 
             <div class="col-sm">
-                <h1>Registrerer nyt deck</h1>
+                <h1>Opdater deck</h1>
             </div>
+
+            <!-- To update the Deck, the deckId need to be on the page, so it can be connected to the correct deck in the database -->
+            <input type="hidden" th:field="*{deckId}">
 
             <div class="form-group col-sm-8">
                 <label>Commander</label>

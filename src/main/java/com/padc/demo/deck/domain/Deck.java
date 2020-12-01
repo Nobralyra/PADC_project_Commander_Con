@@ -4,6 +4,7 @@ import com.padc.demo.core.auditing.Audition;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="deck")
@@ -19,8 +20,10 @@ public class Deck extends Audition
 
     private String nameOfDeck;
 
-    @NotBlank(message = "Skal udfyldes")
-    private String deckType;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "enum('EDH','CEDH', 'ANDET')")
+    @NotNull(message = "Skal udfyldes")
+    private GameType gameType;
 
     @Column(table ="partner_commander")
     private String partnerCommanderName;
@@ -59,14 +62,14 @@ public class Deck extends Audition
         this.commanderName = commanderName;
     }
 
-    public String getDeckType()
+    public GameType getGameType()
     {
-        return deckType;
+        return gameType;
     }
 
-    public void setDeckType(String deckType)
+    public void setGameType(GameType gameType)
     {
-        this.deckType = deckType;
+        this.gameType = gameType;
     }
 
     public String getPartnerCommanderName()

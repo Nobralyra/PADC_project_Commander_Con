@@ -1,6 +1,7 @@
 package com.padc.demo.tournament.domain;
 
 import com.padc.demo.core.auditing.Audition;
+import com.padc.demo.deck.domain.GameType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -31,8 +32,10 @@ public class Tournament extends Audition
 
     private String place;
 
-    @Column(table = "tournament_type_info")
-    private String tournamentType;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "enum('EDH','CEDH', 'ANDET')")
+    @NotNull(message = "Skal udfyldes")
+    private GameType gameType;
 
     @Column(table = "tournament_type_info")
     private String pointsType;
@@ -44,17 +47,6 @@ public class Tournament extends Audition
     public Tournament()
     {
 
-    }
-
-    public Tournament(long tournamentId, @NotBlank(message = "Indtast venligst turnerningsnavnet") String tournamentName, @NotNull LocalDateTime dateAndTime, String place, String tournamentType, String pointsType, String furtherInformation)
-    {
-        this.tournamentId = tournamentId;
-        this.tournamentName = tournamentName;
-        this.dateAndTime = dateAndTime;
-        this.place = place;
-        this.tournamentType = tournamentType;
-        this.pointsType = pointsType;
-        this.furtherInformation = furtherInformation;
     }
 
     public long getTournamentId()
@@ -97,14 +89,14 @@ public class Tournament extends Audition
         this.place = place;
     }
 
-    public String getTournamentType()
+    public GameType getGameType()
     {
-        return tournamentType;
+        return gameType;
     }
 
-    public void setTournamentType(String tournamentType)
+    public void setGameType(GameType gameType)
     {
-        this.tournamentType = tournamentType;
+        this.gameType = gameType;
     }
 
     public String getPointsType()

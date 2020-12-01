@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 @Controller
@@ -66,6 +69,61 @@ public class DeckController
 
             return "/deck/opret_deck";
         }
+        return "redirect:/deck";
+    }
+
+    //Use @PathVariable to bound id from URL to method parameter
+    @GetMapping("/deck/opdater_deck/{id}")
+    public String showUpdateDeck(@PathVariable("id") long id, Model model)
+    {
+        try
+        {
+            model.addAttribute("deck", iDeckService.findById(id));
+            return "/deck/opdater_deck";
+        }
+        catch (EntityNotFoundException entityNotFoundException)
+        {
+            entityNotFoundException.printStackTrace(); // Goes to System.err
+            entityNotFoundException.printStackTrace(System.out);
+            return "redirect:/deck";
+        }
+
+        /**
+         * Håndtere exceptions
+         * https://stackoverflow.com/questions/54395695/what-are-the-best-practices-to-handler-or-throw-exceptions-in-a-spring-boot-appl
+         * https://stackoverflow.com/questions/55283605/spring-mvc-should-service-return-optional-or-throw-an-exception
+         * https://keepgrowing.in/category/java/page/2/
+         * https://stackoverflow.com/questions/49316751/spring-data-jpa-findone-change-to-optional-how-to-use-this
+         * https://stackoverflow.com/questions/60608873/optional-class-in-spring-boot
+         * https://stackoverflow.com/questions/42993428/throw-exception-in-optional-in-java8/42993594
+         * https://stackabuse.com/guide-to-optional-in-java-8/
+         * https://medium.com/faun/working-on-null-elegantly-with-java-optional-62f5e65869c5
+         */
+    }
+
+    @PostMapping("/deck/opdater_deck")
+    public String updateDeck(@ModelAttribute @Valid Deck deck, BindingResult bindingResult, Model model)
+    {
+        if(!bindingResult.hasErrors())
+        {
+            iDeckService.save(deck);
+        }
+        else
+        {
+            System.err.println(bindingResult);
+            model.addAttribute("bindingResult", bindingResult);
+            model.addAttribute("deck", deck);
+
+            return "/deck/opdater_deck";
+        }
+        return "redirect:/deck";
+    }
+
+    @GetMapping("/deck/slet_deck/{id}")
+    public String deleteDeck(@PathVariable("id") long id)
+    {
+        iDeckService.deleteByID(id);
+
         return "redirect:/deck";
     }
 }
