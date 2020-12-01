@@ -40,7 +40,7 @@
                 <label>Decktype</label>
                 <div>
                     <!-- https://www.baeldung.com/thymeleaf-enums -->
-                    <div th:each="gameType: ${T(com.padc.demo.deck.domain.GameType).values()}">
+                    <div th:each="gameType: ${T(com.padc.demo.core.enums.GameType).values()}">
                         <!-- Need to have the th:value, because it could have an array of values -->
                         <input type="radio" th:field="*{gameType}" required th:value="${gameType}">
                         <label th:text="${gameType.getDisplayValue()}"></label>

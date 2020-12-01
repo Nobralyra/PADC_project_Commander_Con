@@ -1,6 +1,7 @@
 package com.padc.demo.deck.domain;
 
 import com.padc.demo.core.auditing.Audition;
+import com.padc.demo.core.enums.GameType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

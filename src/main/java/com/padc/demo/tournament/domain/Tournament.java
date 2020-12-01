@@ -1,7 +1,7 @@
 package com.padc.demo.tournament.domain;
 
 import com.padc.demo.core.auditing.Audition;
-import com.padc.demo.deck.domain.GameType;
+import com.padc.demo.core.enums.GameType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

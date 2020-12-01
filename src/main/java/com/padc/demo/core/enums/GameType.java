@@ -1,4 +1,4 @@
-package com.padc.demo.deck.domain;
+package com.padc.demo.core.enums;
 
 public enum GameType
 {
