@@ -40,7 +40,7 @@ public class UserService implements IService<User>{
      * @return User
      */
     @Override
-    public User findById(long id){
+    public User findById(Long id){
         Optional<User> user = iUserRepository.findById(id);
         /*The double colon operator :: is used to call a method/constructor
         by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
@@ -57,7 +57,7 @@ public class UserService implements IService<User>{
     }
 
     @Override
-    public void deleteByID(long id) {
+    public void deleteByID(Long id) {
         iUserRepository.deleteById(id);
     }
 }
