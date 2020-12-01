@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<!---https://stackoverflow.com/questions/41787219/how-to-use-spring-security-to-custom-login-page
+--->
+
+<div class="container-fluid page">
+    <header th:replace="fragments/empty_top_menu :: empty_top_menuElement"></header>
+
+<form th:action="@{/login}" method="post">
+
+        <div class="col-auto">
+
+            <div class="col-sm-6">
+                <h1>Login</h1>
+            </div>
+            <div class="form-group col-sm-8">
+                <label for="brugernavn">Brugernavn</label>
+                <input type="text" class="form-control" id="brugernavn" name="brugernavn" autofocus="true" autocomplete="off">
+            </div>
+            <div class="form-group col-sm-8">
+                <label for="kodeord">Kodeord</label>
+                <input type="password" class="form-control" id="kodeord" name="kodeord" autofocus="true" autocomplete="off">
+            </div>
+            <div class="form-group col-sm-8">
+                <button id="button_login" type="submit" class="btn btn-primary">login</button>
+            </div>
+        </div>
+
+</form>
+    <div class="form-group col-sm-8">
+        <a class="nav-item active nav-link" th:href="@{/bruger/opret_bruger}">Opret ny bruger</a>
+    </div>
+</div>
+</body>
+</html>
