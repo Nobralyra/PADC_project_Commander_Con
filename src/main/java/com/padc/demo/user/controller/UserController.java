@@ -1,5 +1,6 @@
 package com.padc.demo.user.controller;
 
+import com.padc.demo.core.security.Securitycontext;
 import com.padc.demo.core.security.UserDetailHandler;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.service.UserService;
@@ -18,11 +19,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final Securitycontext securitycontext;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Securitycontext securitycontext) {
         this.userService = userService;
+        this.securitycontext = securitycontext;
     }
-
 
     @GetMapping("/bruger/opret_bruger")
     public String showCreateUser(User user, Model model){
@@ -63,7 +65,7 @@ public class UserController {
         }
 
         userService.save(user);
-        long id = user.getId();
+        Long id = user.getId();
         return "redirect:/bruger/bruger_side/" + id;
     }
 
@@ -84,15 +86,18 @@ public class UserController {
         }
     }
 
-    //men jeg behøver ikke at fragte disse til siden, hvor jeg bare viser profilen
-    //jeg kan bruge sec:authetification til det ligesom på velkommen-siden.
-    //men jeg skal bruge disse, når jeg opdatere bruger på opdatere_bruger siden
     @GetMapping("/bruger/min_profil")
     public String showMyProfile(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailHandler userDetailHandler = (UserDetailHandler) authentication.getPrincipal();
-        model.addAttribute("userDetailHandler", userDetailHandler);
+        model.addAttribute("userDetailHandler", securitycontext.getUserDetailHandler());
         return "/bruger/min_profil";
     }
+
+    @GetMapping("/bruger/slet_bruger")
+    public String delete_profile(){
+        Long id = securitycontext.getUserDetailHandler().getId();
+        userService.deleteByID(id);
+        return "/login";
+    }
+
 
 }
