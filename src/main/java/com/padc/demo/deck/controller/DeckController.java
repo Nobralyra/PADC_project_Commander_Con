@@ -75,7 +75,7 @@ public class DeckController
 
     //Use @PathVariable to bound id from URL to method parameter
     @GetMapping("/deck/opdater_deck/{id}")
-    public String showUpdateDeck(@PathVariable("id") long id, Model model)
+    public String showUpdateDeck(@PathVariable("id") Long id, Model model)
     {
         try
         {
@@ -90,7 +90,8 @@ public class DeckController
         }
 
         /**
-         * Håndtere exceptions
+         * Håndtere exceptions:
+         *
          * https://stackoverflow.com/questions/54395695/what-are-the-best-practices-to-handler-or-throw-exceptions-in-a-spring-boot-appl
          * https://stackoverflow.com/questions/55283605/spring-mvc-should-service-return-optional-or-throw-an-exception
          * https://keepgrowing.in/category/java/page/2/
