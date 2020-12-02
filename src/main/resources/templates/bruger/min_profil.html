@@ -22,7 +22,7 @@
                     <span class="rowSize">Efternavn: </span><span class="rowSize" th:text="${userDetailHandler.getUser().getLastName()}"></span>
                 </div>
 
-                <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/opdatere_bruger}">Opdater profil</a>
+                <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/opdater_bruger}">Opdater profil</a>
                 <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/slet_bruger}">Slet profil</a>
 
             </div>
