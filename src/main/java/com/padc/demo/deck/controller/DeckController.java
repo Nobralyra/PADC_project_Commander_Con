@@ -17,7 +17,6 @@ import javax.validation.Valid;
 @Controller
 public class DeckController
 {
-
     private final IService<Deck> iDeckService;
 
     @Autowired
@@ -28,7 +27,7 @@ public class DeckController
 
     /**
      * Finds all decks the authenticated user has registered
-     * @param model
+     * @param model - holder for model attributes
      * @return String
      */
     @GetMapping("/deck")
@@ -38,6 +37,12 @@ public class DeckController
         return "deck/mine_decks";
     }
 
+    /**
+     *
+     * @param deck - object of Deck
+     * @param model - holder for model attributes
+     * @return String
+     */
     @GetMapping("/deck/opret_deck")
     public String showCreateDeck(Deck deck, Model model)
     {
@@ -55,9 +60,9 @@ public class DeckController
      * sends the data that was in the form back to the HTML,
      * and redirect to the showCreateDeck method
      *
-     * @param deck
-     * @param bindingResult
-     * @param model
+     * @param deck - object of Deck
+     * @param bindingResult - holds result of validation, binding, and contains errors that may occurred
+     * @param model - holder for model attributes
      * @return String
      */
     @PostMapping("/deck/opret_deck")
@@ -79,6 +84,13 @@ public class DeckController
     }
 
     //Use @PathVariable to bound id from URL to method parameter
+
+    /**
+     *
+     * @param id - id of the Deck object
+     * @param model - holder for model attributes
+     * @return String
+     */
     @GetMapping("/deck/opdater_deck/{id}")
     public String showUpdateDeck(@PathVariable("id") Long id, Model model)
     {
@@ -108,6 +120,13 @@ public class DeckController
          */
     }
 
+    /**
+     *
+     * @param deck - object of deck
+     * @param bindingResult - holds result of validation, binding, and contains errors that may occurred
+     * @param model - holder for model attributes
+     * @return String
+     */
     @PostMapping("/deck/opdater_deck")
     public String updateDeck(@ModelAttribute @Valid Deck deck, BindingResult bindingResult, Model model)
     {
@@ -126,6 +145,12 @@ public class DeckController
         return "redirect:/deck";
     }
 
+
+    /**
+     *
+     * @param id - id of the Deck object
+     * @return String
+     */
     @GetMapping("/deck/slet_deck/{id}")
     public String deleteDeck(@PathVariable("id") Long id)
     {
