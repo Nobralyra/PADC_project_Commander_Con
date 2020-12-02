@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: headerElement">
+    <meta charset="UTF-8">
+    <title>Min brugerprofil</title>
+</head>
+<body>
+<div class="container-fluid page">
+    <header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+        <div class="col-auto">
+            <div class="col-sm-6">
+                <h1>Min profil</h1>
+            </div>
+                <div class="form-group col-sm-8" >
+                    <span class="rowSize">Brugernavn: </span><span class="rowSize" sec:authentication="name"></span>
+                </div>
+                <div class="form-group col-sm-8" >
+                    <span class="rowSize">Fornavn: </span><span class="rowSize" th:text="${userDetailHandler.getUser().getFirstName()}"></span>
+                </div>
+                <div class="form-group col-sm-8" >
+                    <span class="rowSize">Efternavn: </span><span class="rowSize" th:text="${userDetailHandler.getUser().getLastName()}"></span>
+                </div>
+
+                <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/opdatere_bruger}">Opdater profil</a>
+                <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/slet_bruger}">Slet profil</a>
+
+            </div>
+
+</div>
+<footer th:replace="fragments/footer :: footerElement"></footer>
+</body>
+</html>
