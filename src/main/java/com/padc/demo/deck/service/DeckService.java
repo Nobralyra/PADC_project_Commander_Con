@@ -1,6 +1,7 @@
 package com.padc.demo.deck.service;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.core.security.Securitycontext;
 import com.padc.demo.deck.domain.Deck;
 import com.padc.demo.deck.repository.IDeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,24 @@ import java.util.Optional;
 public class DeckService implements IService<Deck>
 {
     private final IDeckRepository iDeckRepository;
+    private final Securitycontext securitycontext;
 
     // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
     @Autowired
-    public DeckService(IDeckRepository iDeckRepository)
+    public DeckService(IDeckRepository iDeckRepository, Securitycontext securitycontext)
     {
         this.iDeckRepository = iDeckRepository;
+        this.securitycontext = securitycontext;
     }
 
+    /**
+     * To save the deck it needs to be associated with the User, so User and Deck is still in sync
+     * @param element
+     */
     @Override
     public void save(Deck element)
     {
+        securitycontext.getUserDetailHandler().getUser().addDeck(element);
         iDeckRepository.save(element);
     }
 
@@ -43,25 +51,33 @@ public class DeckService implements IService<Deck>
         Optional<Deck> deck = iDeckRepository.findById(id);
 
         /*The double colon operator :: is used to call a method/constructor
-        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
+        by referring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return deck.orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
     public List<Deck> findAll()
     {
-        List<Deck> deckList = new ArrayList<>();
+        List<Deck> deckListUserHas = findDecksByUser();
 
-        for (Deck deck: iDeckRepository.findAll())
-        {
-            deckList.add(deck);
-        }
-        return deckList;
+        return deckListUserHas;
     }
 
     @Override
     public void deleteByID(Long id)
     {
         iDeckRepository.deleteById(id);
+    }
+
+    public List<Deck> findDecksByUser()
+    {
+        List<Deck> deckList = new ArrayList<>();
+        Long userId = securitycontext.getUserDetailHandler().getId();
+        for (Deck deck: iDeckRepository.findDecksByUser_Id(userId))
+        {
+            deckList.add(deck);
+        }
+
+        return deckList;
     }
 }
