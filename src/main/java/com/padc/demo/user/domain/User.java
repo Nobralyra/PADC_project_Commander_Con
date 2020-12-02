@@ -68,11 +68,10 @@ public class User extends Audition {
      * Instead of doing all the steps in DeckService, we call this utility method that updates both entities, and
      * setUser in deck, so it knows who created it.
      *
-     *
      * https://thorben-janssen.com/best-practices-many-one-one-many-associations-mappings/
      * https://en.wikibooks.org/wiki/Java_Persistence/OneToMany
      * https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3
-     * @param deck
+     * @param deck - object of Deck
      */
     public void addDeck(Deck deck)
     {
@@ -91,7 +90,7 @@ public class User extends Audition {
      * https://thorben-janssen.com/best-practices-many-one-one-many-associations-mappings/
      * https://en.wikibooks.org/wiki/Java_Persistence/OneToMany
      * https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3
-     * @param deck
+     * @param deck - object of Deck
      */
     public void removeDeck(Deck deck)
     {
