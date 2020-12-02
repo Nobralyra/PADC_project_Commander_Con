@@ -42,7 +42,7 @@ public class DeckService implements IService<Deck>
      * then throw a EntityNotFoundException that can be catches later.
      * Optional takes care of not give a NullPointerException, because the return maybe non-null value
      * from the database is in the Optional container.
-     * @param id
+     * @param id - id of Deck object
      * @return Deck
      */
     @Override
