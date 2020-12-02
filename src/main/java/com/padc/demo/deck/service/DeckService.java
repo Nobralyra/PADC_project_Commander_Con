@@ -1,9 +1,13 @@
 package com.padc.demo.deck.service;
 
 import com.padc.demo.core.IService;
+import com.padc.demo.core.security.UserDetailHandler;
 import com.padc.demo.deck.domain.Deck;
 import com.padc.demo.deck.repository.IDeckRepository;
+import com.padc.demo.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -26,6 +30,9 @@ public class DeckService implements IService<Deck>
     @Override
     public void save(Deck element)
     {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailHandler userDetailHandler = (UserDetailHandler) authentication.getPrincipal();
+        userDetailHandler.getUser().addDeck(element);
         iDeckRepository.save(element);
     }
 
@@ -43,7 +50,7 @@ public class DeckService implements IService<Deck>
         Optional<Deck> deck = iDeckRepository.findById(id);
 
         /*The double colon operator :: is used to call a method/constructor
-        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
+        by referring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return deck.orElseThrow(EntityNotFoundException::new);
     }
 
