@@ -3,6 +3,7 @@ package com.padc.demo.user.service;
 import com.padc.demo.core.IService;
 import com.padc.demo.core.security.SecurityConfig;
 import com.padc.demo.core.enums.Role;
+import com.padc.demo.deck.domain.Deck;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.repository.IUserRepository;
 import org.springframework.stereotype.Service;

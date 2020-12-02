@@ -89,33 +89,19 @@ public class UserController {
     @GetMapping("/bruger/min_profil")
     public String showMyProfile(Model model){
 
-        //model.addAttribute("id", id);
         model.addAttribute("userDetailHandler", securitycontext.getUserDetailHandler());
         return "/bruger/min_profil";
     }
 
-    /*
-    @GetMapping("/bruger/opdater_bruger/{id}")
-    public String showUpdateUser(@PathVariable("id") Long id, Model model){
-        //id = securitycontext.getUserDetailHandler().getId();
-        //User user = userService.findById(id);
-        //user = securitycontext.getUserDetailHandler().getUser();
-        model.addAttribute("user", userService.findById(id));
-        return "/bruger/opdater_bruger";
-    }*/
-
 
     @GetMapping("/bruger/opdater_bruger")
     public String showUpdateUser(Model model){
-        //User user = securitycontext.getUserDetailHandler().getUser();
         model.addAttribute("user", securitycontext.getUserDetailHandler().getUser());
         return "/bruger/opdater_bruger";
     }
 
     @PostMapping("/bruger/opdater_bruger")
     public String updateUser(@RequestParam String password2, @Valid User user, BindingResult bindingResult, Model model){
-
-        //userDetailHandler = securitycontext.getUserDetailHandler();
 
         if(bindingResult.hasErrors()){
             model.addAttribute("bindingResult", bindingResult);
