@@ -69,7 +69,7 @@ public class UserController {
 
     //når bugeren er oprettet, skla brugeren logge ind igen
     @GetMapping("/bruger/bruger_side/{id}")
-    public String showUser(@PathVariable("id") int id, Model model) {
+    public String showUser(@PathVariable("id") Long id, Model model) {
         try
         {
             User user = userService.findById(id);

@@ -38,7 +38,7 @@ public class DeckService implements IService<Deck>
      * @return Deck
      */
     @Override
-    public Deck findById(long id)
+    public Deck findById(Long id)
     {
         Optional<Deck> deck = iDeckRepository.findById(id);
 
@@ -60,7 +60,7 @@ public class DeckService implements IService<Deck>
     }
 
     @Override
-    public void deleteByID(long id)
+    public void deleteByID(Long id)
     {
         iDeckRepository.deleteById(id);
     }

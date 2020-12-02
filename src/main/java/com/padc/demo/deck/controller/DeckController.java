@@ -49,6 +49,7 @@ public class DeckController
      * sends the error back to the HTML (what is written in the annotation over the fields in Deck),
      * sends the data that was in the form back to the HTML,
      * and redirect to the showCreateDeck method
+     *
      * @param deck
      * @param bindingResult
      * @param model
@@ -57,7 +58,7 @@ public class DeckController
     @PostMapping("/deck/opret_deck")
     public String createDeck(@Valid Deck deck, BindingResult bindingResult, Model model)
     {
-        if(!bindingResult.hasErrors())
+        if (!bindingResult.hasErrors())
         {
             iDeckService.save(deck);
         }
@@ -104,7 +105,7 @@ public class DeckController
     @PostMapping("/deck/opdater_deck")
     public String updateDeck(@ModelAttribute @Valid Deck deck, BindingResult bindingResult, Model model)
     {
-        if(!bindingResult.hasErrors())
+        if (!bindingResult.hasErrors())
         {
             iDeckService.save(deck);
         }

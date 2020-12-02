@@ -5,7 +5,7 @@ import java.util.List;
 public interface IService<E>
 {
     void save(E element);
-    E findById(long id);
+    E findById(Long id);
     List<E> findAll();
-    void deleteByID(long id);
+    void deleteByID(Long id);
 }

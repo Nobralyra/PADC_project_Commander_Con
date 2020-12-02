@@ -49,35 +49,15 @@
                 </div>
 
                 <div class="form-group col-sm-8">
-
-                    <label>Pointstype</label>
-                    <div class="checkbox-inline">
-
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="elimineringPointsType" class="custom-control-input"
-                                   th:value="Eliminering" th:field="*{pointsType}">
-                            <label class="custom-control-label" for="elimineringPointsType">Eliminering</label>
+                    <label>Turneringstype</label>
+                    <div>
+                        <!-- https://www.baeldung.com/thymeleaf-enums -->
+                        <div th:each="pointType: ${T(com.padc.demo.core.enums.PointType).values()}">
+                            <!-- Need to have the th:value, because it could have an array of values -->
+                            <input type="radio" th:field="*{pointType}" required th:value="${pointType}">
+                            <label th:text="${pointType.getDisplayValue()}"></label>
                         </div>
-
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="pointPointsType" class="custom-control-input" th:value="Point"
-                                   th:field="*{pointsType}">
-                            <label class="custom-control-label" for="pointPointsType">Point</label>
-                        </div>
-
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="MilestonePointsType" class="custom-control-input"
-                                   th:value="Milestone" th:field="*{pointsType}">
-                            <label class="custom-control-label" for="MilestonePointsType">Milestone</label>
-                        </div>
-
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="andetPointsType" class="custom-control-input" th:value="Andet"
-                                   th:field="*{pointsType}">
-                            <label class="custom-control-label" for="andetPointsType">Andet</label>
-                        </div>
-
-                        <span th:if="${#fields.hasErrors('pointsType')}" th:errors="*{pointsType}"></span>
+                        <span th:if="${#fields.hasErrors('pointType')}" th:errors="*{pointType}"></span>
                     </div>
                 </div>
 

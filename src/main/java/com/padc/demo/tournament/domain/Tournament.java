@@ -2,6 +2,7 @@ package com.padc.demo.tournament.domain;
 
 import com.padc.demo.core.auditing.Audition;
 import com.padc.demo.core.enums.GameType;
+import com.padc.demo.core.enums.PointType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class Tournament extends Audition
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tournamentId;
+    private Long tournamentId;
 
     @NotBlank(message = "Skal udfyldes")
     private String tournamentName;
@@ -24,6 +25,7 @@ public class Tournament extends Audition
     /**
      * https://stackoverflow.com/questions/45629318/spring-with-thymeleaf-binding-date-in-html-form
      * Should use LocalDateTime so the HTML datatime_local can get saved in the field. The also gets annotateret with
+     *
      * @DateTimeFormat so the LocalDateTime accepts the ISO 8601
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -37,8 +39,10 @@ public class Tournament extends Audition
     @NotNull(message = "Skal udfyldes")
     private GameType gameType;
 
-    @Column(table = "tournament_type_info")
-    private String pointsType;
+    @Enumerated(EnumType.STRING)
+    @Column(table = "tournament_type_info", columnDefinition = "enum('ELIMINERING','POINT', 'MILESTONE', 'ANDET')")
+    @NotNull(message = "Skal udfyldes")
+    private PointType pointType;
 
     @Lob
     @Column(table = "tournament_type_info")
@@ -49,12 +53,12 @@ public class Tournament extends Audition
 
     }
 
-    public long getTournamentId()
+    public Long getTournamentId()
     {
         return tournamentId;
     }
 
-    public void setTournamentId(long tournamentId)
+    public void setTournamentId(Long tournamentId)
     {
         this.tournamentId = tournamentId;
     }
@@ -99,14 +103,14 @@ public class Tournament extends Audition
         this.gameType = gameType;
     }
 
-    public String getPointsType()
+    public PointType getPointType()
     {
-        return pointsType;
+        return pointType;
     }
 
-    public void setPointsType(String pointsType)
+    public void setPointType(PointType pointType)
     {
-        this.pointsType = pointsType;
+        this.pointType = pointType;
     }
 
     public String getFurtherInformation()

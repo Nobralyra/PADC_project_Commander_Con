@@ -39,12 +39,12 @@ public class TournamentService implements IService<Tournament>
      * @return Tournament
      */
     @Override
-    public Tournament findById(long id)
+    public Tournament findById(Long id)
     {
         Optional<Tournament> tournament = iTournamentRepository.findById(id);
 
         /*The double colon operator :: is used to call a method/constructor
-        by referrring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
+        by referring to the class. Syntax: <<Class name>> :: <<method or constructor>>*/
         return tournament.orElseThrow(EntityNotFoundException::new);
     }
 
@@ -61,7 +61,7 @@ public class TournamentService implements IService<Tournament>
     }
 
     @Override
-    public void deleteByID(long id)
+    public void deleteByID(Long id)
     {
         iTournamentRepository.deleteById(id);
     }
