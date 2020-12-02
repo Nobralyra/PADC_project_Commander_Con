@@ -18,7 +18,11 @@ public class DeckService implements IService<Deck>
     private final IDeckRepository iDeckRepository;
     private final Securitycontext securitycontext;
 
-    // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+    /**
+     * https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+     * @param iDeckRepository
+     * @param securitycontext
+     */
     @Autowired
     public DeckService(IDeckRepository iDeckRepository, Securitycontext securitycontext)
     {
@@ -27,8 +31,9 @@ public class DeckService implements IService<Deck>
     }
 
     /**
-     * To save the deck it needs to be associated with the User, so User and Deck is still in sync
-     * @param element
+     * To save a deck it needs to be associated with a users id because the relationship is bidirectional.
+     * The id comes from what user that created the deck.
+     * @param element - object of Deck
      */
     @Override
     public void save(Deck element)
@@ -55,6 +60,10 @@ public class DeckService implements IService<Deck>
         return deck.orElseThrow(EntityNotFoundException::new);
     }
 
+    /**
+     * Is called by DeckController and returns a list of what findDecksByUser has found
+     * @return List<Deck>
+     */
     @Override
     public List<Deck> findAll()
     {
@@ -63,12 +72,21 @@ public class DeckService implements IService<Deck>
         return deckListUserHas;
     }
 
+    /**
+     * Deletes a specific deck entity
+     * @param id - id of Deck object
+     */
     @Override
     public void deleteByID(Long id)
     {
         iDeckRepository.deleteById(id);
     }
 
+    /**
+     * Finds all deck entities who is associated with users id
+     * For each loop adds what method findDeckByUser_Id(userId) returns to the deckList
+     * @return List<Deck>
+     */
     public List<Deck> findDecksByUser()
     {
         List<Deck> deckList = new ArrayList<>();

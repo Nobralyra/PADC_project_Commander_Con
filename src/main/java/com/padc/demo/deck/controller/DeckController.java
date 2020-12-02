@@ -83,10 +83,8 @@ public class DeckController
         return "redirect:/deck";
     }
 
-    //Use @PathVariable to bound id from URL to method parameter
-
     /**
-     *
+     * Use @PathVariable to bound id from URL to method parameter
      * @param id - id of the Deck object
      * @param model - holder for model attributes
      * @return String

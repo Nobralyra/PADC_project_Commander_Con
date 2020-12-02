@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="fragments/header :: headerElement">
     <meta charset="UTF-8">
     <title>Deck</title>
@@ -38,9 +38,8 @@
                     <td th:text="${Deck.gameType}"></td>
 
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/deck/opdater_deck/' + ${Deck.deckId}}" role="button">Opdater</a>
-                        <a class="btn btn-primary" th:href="@{'/deck/slet_deck/' + ${Deck.deckId}}"
-                           role="button">Slet</a>
+                        <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{'/deck/opdater_deck/' + ${Deck.deckId}}" role="button">Opdater</a>
+                        <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{'/deck/slet_deck/' + ${Deck.deckId}}" role="button">Slet</a>
                     </td>
                 </tr>
                 </tbody>

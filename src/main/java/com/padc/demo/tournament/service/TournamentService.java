@@ -17,13 +17,20 @@ public class TournamentService implements IService<Tournament>
 
     private final ITournamentRepository iTournamentRepository;
 
-    // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+    /**
+     * https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+     * @param iTournamentRepository
+     */
     @Autowired
     public TournamentService(ITournamentRepository iTournamentRepository)
     {
         this.iTournamentRepository = iTournamentRepository;
     }
 
+    /**
+     * Saves the tournament in the database
+     * @param element - object of Tournament
+     */
     @Override
     public void save(Tournament element)
     {
@@ -35,7 +42,7 @@ public class TournamentService implements IService<Tournament>
      * then throw a EntityNotFoundException that can be catches later.
      * Optional takes care of not give a NullPointerException, because the return maybe non-null value
      * from the database is in the Optional container.
-     * @param id
+     * @param id - id of Tournament object
      * @return Tournament
      */
     @Override
@@ -48,6 +55,11 @@ public class TournamentService implements IService<Tournament>
         return tournament.orElseThrow(EntityNotFoundException::new);
     }
 
+    /**
+     * Finds all tournament entities in the database
+     * For each loop adds what method findAll returns to the tournamentList
+     * @return List<Tournament>
+     */
     @Override
     public List<Tournament> findAll()
     {
@@ -60,6 +72,10 @@ public class TournamentService implements IService<Tournament>
         return tournamentList;
     }
 
+    /**
+     * Deletes a specific tournament entity
+     * @param id - id of Tournament object
+     */
     @Override
     public void deleteByID(Long id)
     {
