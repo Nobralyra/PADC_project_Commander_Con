@@ -24,9 +24,10 @@ public class User extends Audition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //ved ikke, om de virker i deres egen tabel
+    @NotBlank(message = "Indtast venligst brugernavn")
     @Column(table = "login_info")
     private String username;
+    @NotBlank(message = "Indtast venligst kodeord")
     @Column(table = "login_info")
     private String password;
 
