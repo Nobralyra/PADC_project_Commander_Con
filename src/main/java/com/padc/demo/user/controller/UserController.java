@@ -1,7 +1,10 @@
 package com.padc.demo.user.controller;
 
+import com.padc.demo.core.security.UserDetailHandler;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,6 +67,7 @@ public class UserController {
         return "redirect:/bruger/bruger_side/" + id;
     }
 
+    //når bugeren er oprettet, skla brugeren logge ind igen
     @GetMapping("/bruger/bruger_side/{id}")
     public String showUser(@PathVariable("id") Long id, Model model) {
         try
@@ -78,6 +82,17 @@ public class UserController {
             entityNotFoundException.printStackTrace(System.out);
             return "/velkommen";
         }
+    }
+
+    //men jeg behøver ikke at fragte disse til siden, hvor jeg bare viser profilen
+    //jeg kan bruge sec:authetification til det ligesom på velkommen-siden.
+    //men jeg skal bruge disse, når jeg opdatere bruger på opdatere_bruger siden
+    @GetMapping("/bruger/min_profil")
+    public String showMyProfile(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailHandler userDetailHandler = (UserDetailHandler) authentication.getPrincipal();
+        model.addAttribute("userDetailHandler", userDetailHandler);
+        return "/bruger/min_profil";
     }
 
 }

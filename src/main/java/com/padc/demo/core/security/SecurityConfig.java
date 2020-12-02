@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .csrf().disable(); // Disable CSRF support
     }
 
-
     @Bean
     //@SuppressWarnings("deprecation")
     public PasswordEncoder getEncoder(){

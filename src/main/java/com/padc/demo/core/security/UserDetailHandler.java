@@ -52,5 +52,13 @@ public class UserDetailHandler implements UserDetails {
         return true;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public long getId(){
+        return this.user.getId();
+    }
+
 
 }
