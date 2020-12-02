@@ -51,6 +51,7 @@ public class User extends Audition {
      * mappedBy = "user" attribute specifies that the field "private User user;" in class Deck,
      * owns the relationship (is the owner), and therefore contains the foreign key to query findAll
      * decks for an user.
+     *
      * https://en.wikibooks.org/wiki/Java_Persistence/OneToMany
      */
     @OneToMany(cascade = CascadeType.ALL,
