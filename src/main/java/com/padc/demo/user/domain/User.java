@@ -86,6 +86,7 @@ public class User extends Audition {
     }
 
     /**
+     * Not needed here, because we actually delete the entire deck and not just the user in deck
      * For removing an entity from the relationship, we need to update both sides of the association.
      * Instead of doing it in the Service, it can be done with af utility method that updates both entities.
      *
@@ -94,9 +95,9 @@ public class User extends Audition {
      * https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3
      * @param deck - object of Deck
      */
-    public void removeDeck(Deck deck)
-    {
-        this.listOfDecks.remove(deck);
-        deck.setUser(null);
-    }
+//    public void removeDeck(Deck deck)
+//    {
+//        this.listOfDecks.remove(deck);
+//        deck.setUser(null);
+//    }
 }
