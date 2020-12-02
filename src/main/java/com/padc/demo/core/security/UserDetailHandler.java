@@ -48,17 +48,10 @@ public class UserDetailHandler implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    public boolean isEnabled() { return true; }
 
-    public User getUser() {
-        return user;
-    }
-
-    public long getId(){
-        return this.user.getId();
-    }
+    public User getUser() { return user; }
+    public long getId(){ return this.user.getId(); }
 
 
 }

@@ -88,12 +88,52 @@ public class UserController {
 
     @GetMapping("/bruger/min_profil")
     public String showMyProfile(Model model){
+
+        //model.addAttribute("id", id);
         model.addAttribute("userDetailHandler", securitycontext.getUserDetailHandler());
         return "/bruger/min_profil";
     }
 
+    /*
+    @GetMapping("/bruger/opdater_bruger/{id}")
+    public String showUpdateUser(@PathVariable("id") Long id, Model model){
+        //id = securitycontext.getUserDetailHandler().getId();
+        //User user = userService.findById(id);
+        //user = securitycontext.getUserDetailHandler().getUser();
+        model.addAttribute("user", userService.findById(id));
+        return "/bruger/opdater_bruger";
+    }*/
+
+
+    @GetMapping("/bruger/opdater_bruger")
+    public String showUpdateUser(Model model){
+        //User user = securitycontext.getUserDetailHandler().getUser();
+        model.addAttribute("user", securitycontext.getUserDetailHandler().getUser());
+        return "/bruger/opdater_bruger";
+    }
+
+    @PostMapping("/bruger/opdater_bruger")
+    public String updateUser(@RequestParam String password2, @Valid User user, BindingResult bindingResult, Model model){
+
+        //userDetailHandler = securitycontext.getUserDetailHandler();
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("bindingResult", bindingResult);
+            return "/bruger/opdater_bruger";
+        }
+        if(!password2.equals(user.getPassword())){
+            String kode_igen = "Skriv venligst den samme kode igen";
+            model.addAttribute("kode_igen", kode_igen);
+            return "/bruger/opdater_bruger";
+        }
+
+        userService.save(user);
+
+        return "/velkommen";
+    }
+
     @GetMapping("/bruger/slet_bruger")
-    public String delete_profile(){
+    public String deleteUser(){
         Long id = securitycontext.getUserDetailHandler().getId();
         userService.deleteByID(id);
         return "/login";
