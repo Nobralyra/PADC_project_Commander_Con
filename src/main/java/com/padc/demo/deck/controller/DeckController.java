@@ -26,6 +26,11 @@ public class DeckController
         this.iDeckService = iDeckService;
     }
 
+    /**
+     * Finds all decks the authenticated user has registered
+     * @param model
+     * @return String
+     */
     @GetMapping("/deck")
     public String deckPage(Model model)
     {
