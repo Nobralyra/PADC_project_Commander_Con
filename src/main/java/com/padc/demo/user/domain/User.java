@@ -42,6 +42,7 @@ public class User extends Audition {
     @NotBlank(message = "Indtast venligst efternavn")
     private String lastName;
 
+    @NotBlank(message = "Indtast venligst e-mail")
     @Column(table ="contact_info")
     private String emailAddress;
 
@@ -60,7 +61,7 @@ public class User extends Audition {
             orphanRemoval = true,
             fetch = FetchType.LAZY,
             mappedBy = "user")
-    private List<Deck> listOfDecks;
+    private List<Deck> listOfDecks = new ArrayList<>();
 
 
     /**
@@ -74,6 +75,7 @@ public class User extends Audition {
      * https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3
      * @param deck
      */
+
     public void addDeck(Deck deck)
     {
         listOfDecks = new ArrayList<>();
