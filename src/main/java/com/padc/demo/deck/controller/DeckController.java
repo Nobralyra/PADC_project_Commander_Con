@@ -122,7 +122,7 @@ public class DeckController
     }
 
     @GetMapping("/deck/slet_deck/{id}")
-    public String deleteDeck(@PathVariable("id") long id)
+    public String deleteDeck(@PathVariable("id") Long id)
     {
         iDeckService.deleteByID(id);
 
