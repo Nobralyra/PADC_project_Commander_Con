@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 //https://github.com/springframeworkguru/ssc-brewery/blob/db-project-lombok/src/main/java/guru/sfg/brewery/domain/security/User.java
@@ -64,7 +65,9 @@ public class User extends Audition {
 
     /**
      * For adding an entity from the relationship, we need to update both sides of the association.
-     * Instead of doing it in the Service, it can be done with af utility method that updates both entities.
+     * Instead of doing all the steps in DeckService, we call this utility method that updates both entities, and
+     * setUser in deck, so it knows who created it.
+     *
      *
      * https://thorben-janssen.com/best-practices-many-one-one-many-associations-mappings/
      * https://en.wikibooks.org/wiki/Java_Persistence/OneToMany
@@ -73,6 +76,7 @@ public class User extends Audition {
      */
     public void addDeck(Deck deck)
     {
+        listOfDecks = new ArrayList<>();
         this.listOfDecks.add(deck);
         if (deck.getUser() != this)
         {
