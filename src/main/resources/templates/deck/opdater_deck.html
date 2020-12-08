@@ -121,6 +121,7 @@
                                     // already exits in the commanderNameAPI array. If it exists it returns the index,
                                     // but if it does not it return -1.
                                     // If it returns -1 the card.name is pushed (similar to add in Java) to the commanderNameAPI array
+                                    // https://api.jquery.com/jquery.inarray/
                                     if ($.inArray(card.name, commanderNameAPI) === -1) {
                                         commanderNameAPI.push(card.name);
                                     }
