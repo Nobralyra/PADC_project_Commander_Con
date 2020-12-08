@@ -115,7 +115,8 @@ public class UserController {
 
         userService.save(user);
 
-        return "/velkommen";
+        //when user has updated, user has to login again to see updated profile
+        return "/login";
     }
 
     @GetMapping("/bruger/slet_bruger")
