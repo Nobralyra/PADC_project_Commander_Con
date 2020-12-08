@@ -38,7 +38,7 @@
                 <div class="form-group col-sm-8">
                     <label>Turneringstype</label>
                     <div>
-                        <!-- https://www.baeldung.com/thymeleaf-enums -->
+                        <!-- How to use enums in Thymeleaf: https://www.baeldung.com/thymeleaf-enums -->
                         <div th:each="gameType: ${T(com.padc.demo.core.enums.GameType).values()}">
                             <!-- Need to have the th:value, because it could have an array of values -->
                             <input type="radio" th:field="*{gameType}" required th:value="${gameType}">
@@ -51,7 +51,7 @@
                 <div class="form-group col-sm-8">
                     <label>Turneringstype</label>
                     <div>
-                        <!-- https://www.baeldung.com/thymeleaf-enums -->
+                        <!-- How to use enums in Thymeleaf: https://www.baeldung.com/thymeleaf-enums -->
                         <div th:each="pointType: ${T(com.padc.demo.core.enums.PointType).values()}">
                             <!-- Need to have the th:value, because it could have an array of values -->
                             <input type="radio" th:field="*{pointType}" required th:value="${pointType}">
@@ -76,20 +76,4 @@
 </div>
 <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
-
-<script>
-
-    // Since we using HTML5 validation, then this function needs to be executed before it gets validated
-    // https://stackoverflow.com/questions/6218494/using-the-html5-required-attribute-for-a-group-of-checkboxes
-    // $('button[type="submit"]').on('click', function() {
-    //
-    //     $cbx_group = $("input:checkbox[id^='deckType-']"); // name is not always helpful ;)
-    //
-    //     $cbx_group.prop('required', true);
-    //     if($cbx_group.is(":checked")){
-    //         $cbx_group.prop('required', false);
-    //     }
-    // });
-
-</script>
 </html>

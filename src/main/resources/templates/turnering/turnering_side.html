@@ -34,7 +34,7 @@
                     <td th:text="${#temporals.format(Tournament.dateAndTime, 'dd-MM-yy HH:mm')}"></td>
 
                     <td>
-                        <!---Not yet implemented, only buttons --->
+                        <!-- How to use enums in Thymeleaf: https://www.baeldung.com/thymeleaf-enums -->
                         <a class="btn btn-primary" th:href="@{'/turnering'}" role="button">Opdater</a>
                         <a class="btn btn-primary" th:href="@{'/turnering'}" role="button">Slet</a>
                     </td>

@@ -115,7 +115,7 @@ public class UserController {
 
         userService.save(user);
 
-        return "/velkommen";
+        return "/login";
     }
 
     @GetMapping("/bruger/slet_bruger")

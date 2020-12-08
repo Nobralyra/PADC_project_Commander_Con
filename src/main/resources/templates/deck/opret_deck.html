@@ -39,7 +39,7 @@
             <div class="form-group col-sm-8">
                 <label>Decktype</label>
                 <div>
-                    <!-- https://www.baeldung.com/thymeleaf-enums -->
+                    <!-- How to use enums in Thymeleaf: https://www.baeldung.com/thymeleaf-enums -->
                     <div th:each="gameType: ${T(com.padc.demo.core.enums.GameType).values()}">
                         <!-- Need to have the th:value, because it could have an array of values -->
                         <input type="radio" th:field="*{gameType}" required th:value="${gameType}">
@@ -61,21 +61,36 @@
 
 <script>
 
-    // Venter til alt HTML og Javascript er loaded
+    // Waits for the HTML and JavaScript to be loaded
     $(document).ready(function () {
-        // autocomplete er en metode der laver en dropdown menu og har nogle forskellige parameter
+        // The method autocomplete create a list of suggestions of matches to what the user has typed.
+        // Autocomplete can recieve input from input elements, textarea elements and elements with the contenteditable attribute.
+        // Autocomplete has different options (parameters) you can use, but it shall always has source option specified.
+        // Source option defines what data to use. It can be an Array, String or an Function.
+        // Here it uses a function that serves as a callback that gets two arguments - a request object and a response callback.
+        // The function has a ajax request that fecth data from the external API.
+        // The minLength option is also defined here to 3 - the number of characters a user must type before a search is performed.
+
+        // https://api.jqueryui.com/autocomplete/
+        // https://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm
+
         // source - JSON fil - kan være hvad som helst. her er function bagefter, fordi man ønsker at få
         // returneret et ajaxkald
         $('#commanderName, #partnerCommanderName').autocomplete(
             {
                 source: function (request, response) {
+                    // Browser logs the request object with all its properties (can see it in console of the browser)
                     console.dir(request);
 
-                    // ajax laver selve connection og henter data fra externe API
+                    // ajax make the connection to the external Api and fetch data from it
+                    // https://api.jquery.com/jQuery.ajax/
                     $.ajax(
                         {
+                            // The external API
                             url: 'https://api.magicthegathering.io/v1/cards',
+                            // Type of data we are expecting back from the server
                             dataType: "json",
+                            // The query parameters to the API
                             data:
                                 {
                                     name: request.term,
@@ -85,28 +100,32 @@
                                     pageSize: 5,
                                     page: 1
                                 },
-                            // success - hvad skal der ske, hvis det gik godt
+                            // The function gets called if the request succeeded
+                            // data is the returned JSON (formatted according to the dataType) from the API
                             success: function (data) {
+                                // Browser logs the request object with all its properties (can see it in console of the browser)
                                 console.dir(data)
 
-                                // laver et nyt tomt array
+                                // Make a empty array (similar to ArrayList from Java)
                                 var commanderNameAPI = [];
 
-                                // looper igennem alle kortene
+                                // Loops through the cards
                                 data.cards.forEach(function (card) {
 
-                                    // Søger efter om et specifikt navn allerede er tilføjet til arrayet
-                                    // Hvis ja, så returneres dens index
-                                    // Hvis nej, så returneres -1
-                                    // Her ønskes der kun at tilføje unikke navne til arrayet
+                                    // We only want to have unique card names listed in the suggested list.
+                                    // To secure that we use the $.inArray() method that searches after if the card.name
+                                    // already exits in the commanderNameAPI array. If it exists it returns the index,
+                                    // but if it does not it return -1.
+                                    // If it returns -1 the card.name is pushed (similar to add in Java) to the commanderNameAPI array
                                     if ($.inArray(card.name, commanderNameAPI) === -1) {
-                                        // tager navnet fra hvert kort, og ligger i arrayet (samme som append)
                                         commanderNameAPI.push(card.name);
                                     }
                                 });
+                                // Browser logs the commanderNameAPI array with all its properties (can see it in console of the browser)
                                 console.dir(commanderNameAPI);
 
-                                // returnere resultatet af arrayet tilbage til source (autocomplete)
+                                // response callback returns a single argument, that are the data to suggest to the user
+                                // Here response return the result of the commanderNameAPI array back to source in autocomplete
                                 response(commanderNameAPI);
                             }
                         });

@@ -19,6 +19,18 @@ public class DeckController
 {
     private final IService<Deck> iDeckService;
 
+    /**
+     * Constructor injection
+     * We do not have to specify @Autowired, as long as the class only have one constructor and the class itself
+     * is annotated with a Spring bean, because Spring automatic make the dependency to be injected via the constructor.
+     * It is used here just for readability
+     *
+     * To understand how constructor injection works:
+     * https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+     * https://reflectoring.io/constructor-injection/
+     *
+     * @param iDeckService - interface of provided methods
+     */
     @Autowired
     public DeckController(IService<Deck> iDeckService)
     {
@@ -27,6 +39,7 @@ public class DeckController
 
     /**
      * Finds all decks the authenticated user has registered
+     *
      * @param model - holder for model attributes
      * @return String
      */
@@ -38,8 +51,9 @@ public class DeckController
     }
 
     /**
+     * Provides the Deck object so user can register a deck
      *
-     * @param deck - object of Deck
+     * @param deck  - object of Deck
      * @param model - holder for model attributes
      * @return String
      */
@@ -52,17 +66,16 @@ public class DeckController
     }
 
     /**
-     * Checks if the input id valid or not.
+     * Checks if the input of creating a new deck is valid or not.
      * If it is valid, then the data gets saved in the database, and should redirect back to
-     * administration site (does not exist yet).
+     * deck site.
      * If it is not valid, then print out the error in the standard error stream,
      * sends the error back to the HTML (what is written in the annotation over the fields in Deck),
-     * sends the data that was in the form back to the HTML,
-     * and redirect to the showCreateDeck method
+     * sends the data that was in the form back to the HTML, and redirect to the showCreateDeck method.
      *
-     * @param deck - object of Deck
+     * @param deck          - object of Deck
      * @param bindingResult - holds result of validation, binding, and contains errors that may occurred
-     * @param model - holder for model attributes
+     * @param model         - holder for model attributes
      * @return String
      */
     @PostMapping("/deck/opret_deck")
@@ -85,7 +98,15 @@ public class DeckController
 
     /**
      * Use @PathVariable to bound id from URL to method parameter
-     * @param id - id of the Deck object
+     * If a deck needs to be updated, the user clicks on that deck "opdater" button. The "opdater" button provide
+     * the id of what specific deck the user want to update.
+     * We then use that id to find the entity of the deck in the database, and returns the result back to the HTML
+     * where user can update the information of that deck.
+     *
+     * If the database could not find a deck that matches the given id, then DeckService throw a EntityNotFoundException
+     * that get caught here.
+     *
+     * @param id    - id of the Deck object
      * @param model - holder for model attributes
      * @return String
      */
@@ -103,26 +124,20 @@ public class DeckController
             entityNotFoundException.printStackTrace(System.out);
             return "redirect:/deck";
         }
-
-        /**
-         * Håndtere exceptions:
-         *
-         * https://stackoverflow.com/questions/54395695/what-are-the-best-practices-to-handler-or-throw-exceptions-in-a-spring-boot-appl
-         * https://stackoverflow.com/questions/55283605/spring-mvc-should-service-return-optional-or-throw-an-exception
-         * https://keepgrowing.in/category/java/page/2/
-         * https://stackoverflow.com/questions/49316751/spring-data-jpa-findone-change-to-optional-how-to-use-this
-         * https://stackoverflow.com/questions/60608873/optional-class-in-spring-boot
-         * https://stackoverflow.com/questions/42993428/throw-exception-in-optional-in-java8/42993594
-         * https://stackabuse.com/guide-to-optional-in-java-8/
-         * https://medium.com/faun/working-on-null-elegantly-with-java-optional-62f5e65869c5
-         */
     }
 
     /**
+     * Checks if the input of updating a deck is valid or not.
+     * If it is valid, then the data gets saved in the database, and should redirect back to
+     * deck site.
+     * If it is not valid, then print out the error in the standard error stream,
+     * sends the error back to the HTML (what is written in the annotation over the fields in Deck),
+     * sends the data that was in the form back to the HTML,
+     * and redirect to the showCreateDeck method
      *
-     * @param deck - object of deck
+     * @param deck          - object of deck
      * @param bindingResult - holds result of validation, binding, and contains errors that may occurred
-     * @param model - holder for model attributes
+     * @param model         - holder for model attributes
      * @return String
      */
     @PostMapping("/deck/opdater_deck")
@@ -143,8 +158,10 @@ public class DeckController
         return "redirect:/deck";
     }
 
-
     /**
+     * If user want to delete a deck, the user click on that deck "Slet" button. The "slet" button provide
+     * the id of what specific deck the user want to delete.
+     * We then use that id to delete the entity of the deck in the database.
      *
      * @param id - id of the Deck object
      * @return String

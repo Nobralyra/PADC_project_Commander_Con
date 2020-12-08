@@ -17,13 +17,30 @@ public class TournamentController
 {
     private final IService<Tournament> iTournamentService;
 
-    // https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+    /**
+     * Constructor injection
+     * We do not have to specify @Autowired, as long as the class only have one constructor and the class itself
+     * is annotated with a Spring bean, because Spring automatic make the dependency to be injected via the constructor.
+     * It is used here just for readability
+     *
+     * To understand how constructor injection works:
+     * https://stackoverflow.com/questions/40620000/spring-autowire-on-properties-vs-constructor
+     * https://reflectoring.io/constructor-injection/
+     *
+     * @param iTournamentService - interface of provided methods
+     */
     @Autowired
     public TournamentController(IService<Tournament> iTournamentService)
     {
         this.iTournamentService = iTournamentService;
     }
 
+    /**
+     * Finds all tournaments available and shows it to ROLE_ORGANIZER and ROLE_ADMIN
+     *
+     * @param model - holder for model attributes
+     * @return String
+     */
     @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @GetMapping("/turnering")
     public String tournamentPage(Model model)
@@ -32,6 +49,13 @@ public class TournamentController
         return "turnering/turnering_side";
     }
 
+    /**
+     * Provides the Tournament object so ROLE_ORGANIZER and ROLE_ADMIN can register a tournament
+     *
+     * @param tournament - object of Tournament
+     * @param model      - holder of model attributes
+     * @return String
+     */
     @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @GetMapping("/turnering/opret_turnering")
     public String showCreateTournament(Tournament tournament, Model model)
@@ -42,23 +66,23 @@ public class TournamentController
     }
 
     /**
-     * Checks if the input id valid or not.
+     * Checks if the input of creating a new tournament is valid or not.
      * If it is valid, then the data gets saved in the database, and should redirect back to
-     * administration site (does not exist yet).
+     * turnering site.
      * If it is not valid, then print out the error in the standard error stream,
      * sends the error back to the HTML (what is written in the annotation over the fields in Tournament),
-     * sends the data that was in the form back to the HTML,
-     * and redirect to the showCreateTournament method
-     * @param tournament
-     * @param bindingResult
-     * @param model
+     * sends the data that was in the form back to the HTML, and redirect to the showCreateTournament method.
+     *
+     * @param tournament    - object of Tournament
+     * @param bindingResult - holds result of validation, binding, and contains errors that may occurred
+     * @param model         - holder for model attributes
      * @return String
      */
     @Secured({"ROLE_ORGANIZER", "ROLE_ADMIN"})
     @PostMapping("/turnering/opret_turnering")
     public String createTournament(@Valid Tournament tournament, BindingResult bindingResult, Model model)
     {
-        if(!bindingResult.hasErrors())
+        if (!bindingResult.hasErrors())
         {
             iTournamentService.save(tournament);
         }
