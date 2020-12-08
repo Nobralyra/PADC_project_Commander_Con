@@ -30,11 +30,15 @@
                 <tr th:each="Tournament : ${tournament}">
                     <td hidden th:text="${Tournament.tournamentId}"></td>
                     <td th:text="${Tournament.tournamentName}"></td>
-                    <!-- https://www.baeldung.com/dates-in-thymeleaf -->
+                    <!-- To format the LocalDateTime in Tournament (not show the T from ISO 8601) we use the
+                    thymeleaf-extras-java8time dependecy, and use the #temporals utility to format the dateAndTime
+                    
+                    https://stackoverflow.com/questions/45629318/spring-with-thymeleaf-binding-date-in-html-form
+                    https://www.baeldung.com/dates-in-thymeleaf -->
                     <td th:text="${#temporals.format(Tournament.dateAndTime, 'dd-MM-yy HH:mm')}"></td>
 
                     <td>
-                        <!-- How to use enums in Thymeleaf: https://www.baeldung.com/thymeleaf-enums -->
+                        <!---Not yet implemented, only buttons --->
                         <a class="btn btn-primary" th:href="@{'/turnering'}" role="button">Opdater</a>
                         <a class="btn btn-primary" th:href="@{'/turnering'}" role="button">Slet</a>
                     </td>

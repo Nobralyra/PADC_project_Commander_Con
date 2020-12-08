@@ -24,7 +24,8 @@ public class Tournament extends Audition
 
     /**
      * Should use LocalDateTime so the HTML datatime_local can get saved in the field. The also gets annotateret with
-     * "@DateTimeFormat" so the LocalDateTime accepts the ISO 8601
+     * "@DateTimeFormat" so Spring/Thymeleaf knows hot to format the values correctly
+     * The LocalDateTime accepts the ISO 8601
      *
      * https://stackoverflow.com/questions/45629318/spring-with-thymeleaf-binding-date-in-html-form
      */
