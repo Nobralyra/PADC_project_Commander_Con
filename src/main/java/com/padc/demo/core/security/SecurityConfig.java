@@ -21,21 +21,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login", "/mainCSS.css", "/resources/**", "/webjars/**", "/bruger/opret_bruger", "/bruger/bruger_side/**").permitAll()
+                .antMatchers("/login", "/mainCSS.css", "/resources/**", "/bruger/opret_bruger", "/bruger/bruger_side/**").permitAll()
                 .anyRequest().hasAnyRole("ORGANIZER", "PARTICIPANT")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                //username is called brugernavn on customized login-page
                 .usernameParameter("brugernavn")
-                .passwordParameter("kodeord")
-                .permitAll() // Allow access to any URL associate to logout()
-                .and()
-                .csrf().disable(); // Disable CSRF support
+                //password is called kodeord on customized login-page
+                .passwordParameter("kodeord");
     }
 
     @Bean
-    //@SuppressWarnings("deprecation")
     public PasswordEncoder getEncoder(){
         return new BCryptPasswordEncoder();
     }

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+    //https://www.concretepage.com/spring-4/spring-mvc-without-controller-example
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

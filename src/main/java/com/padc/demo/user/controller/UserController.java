@@ -1,11 +1,8 @@
 package com.padc.demo.user.controller;
 
 import com.padc.demo.core.security.Securitycontext;
-import com.padc.demo.core.security.UserDetailHandler;
 import com.padc.demo.user.domain.User;
 import com.padc.demo.user.service.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -115,6 +112,7 @@ public class UserController {
 
         userService.save(user);
 
+        //when user has updated, user has to login again to see updated profile
         return "/login";
     }
 
