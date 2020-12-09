@@ -21,11 +21,14 @@ public class PersistenceConfig
     {
         return new AuditorAwareImplementation();
     }
-    /*https://www.baeldung.com/java-zone-offset
-      https://stackoverflow.com/questions/55250489/spring-jpa-hibernate-cet-timezone-for-auditingentitylistener
-      EnableJpaAuditing has a parametre "dateTimeProviderRef". We make a bean, that provides
-      the correct wintertime for auditing in database.
-    */
+
+    /**
+     * EnableJpaAuditing has a parametre "dateTimeProviderRef". We make a bean, that provides
+     * the correct wintertime for auditing in database.
+     * https://www.baeldung.com/java-zone-offset
+     * https://stackoverflow.com/questions/55250489/spring-jpa-hibernate-cet-timezone-for-auditingentitylistener
+     * @return DateTimeProvider
+     */
     @Bean
     public DateTimeProvider utcDateTimeProvider() {
         ZoneOffset zoneOffSet= ZoneOffset.of("+02:00");

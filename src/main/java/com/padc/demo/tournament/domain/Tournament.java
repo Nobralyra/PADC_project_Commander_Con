@@ -35,11 +35,19 @@ public class Tournament extends Audition
 
     private String place;
 
+    /**
+     * Hibernate supports mapping of Java enums
+     * https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode
+     */
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum('EDH','CEDH', 'ANDET')")
     @NotNull(message = "Skal udfyldes")
     private GameType gameType;
 
+    /**
+     * Hibernate supports mapping of Java enums
+     * https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode
+     */
     @Enumerated(EnumType.STRING)
     @Column(table = "tournament_type_info", columnDefinition = "enum('ELIMINERING','POINT', 'MILESTONE', 'ANDET')")
     @NotNull(message = "Skal udfyldes")

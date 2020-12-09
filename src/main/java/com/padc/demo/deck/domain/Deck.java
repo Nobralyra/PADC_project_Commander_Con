@@ -22,6 +22,10 @@ public class Deck extends Audition
 
     private String nameOfDeck;
 
+    /**
+     * Hibernate supports mapping of Java enums
+     * https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode
+     */
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "enum('EDH','CEDH', 'ANDET')")
     @NotNull(message = "Skal udfyldes")
@@ -110,6 +114,7 @@ public class Deck extends Audition
      * The equality has to be consistent across all entity state transitions.
      *
      * To understand why to use equals and hashCode:
+     * https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#mapping-model-pojo-equalshashcode
      * https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3
      * https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
      * https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/

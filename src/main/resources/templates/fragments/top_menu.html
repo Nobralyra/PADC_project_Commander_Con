@@ -11,7 +11,7 @@
         <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/}" >Forside</a>
         <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_ORGANIZER')" th:href="@{/bruger/opret_bruger}">Opret bruger</a>
         <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/bruger/min_profil}">Min profil</a>
-        <a class="nav-item active nav-link" sec:authorize="hasRole('ROLE_ORGANIZER')" th:href="@{/turnering}" >Turneringer</a>
+        <a class="nav-item active nav-link" sec:authorize="hasRole('ROLE_ORGANIZER')" th:href="@{/turnering}" >Administrer turneringer</a>
         <a class="nav-item active nav-link" sec:authorize="hasAnyRole('ROLE_PARTICIPANT', 'ROLE_ORGANIZER')" th:href="@{/deck}">Mine decks</a>
     </div>
 </nav>

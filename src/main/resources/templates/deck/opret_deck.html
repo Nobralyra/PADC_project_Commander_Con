@@ -63,19 +63,16 @@
 
     // Waits for the HTML and JavaScript to be loaded
     $(document).ready(function () {
-        // The method autocomplete create a list of suggestions of matches to what the user has typed.
-        // Autocomplete can recieve input from input elements, textarea elements and elements with the contenteditable attribute.
-        // Autocomplete has different options (parameters) you can use, but it shall always has source option specified.
-        // Source option defines what data to use. It can be an Array, String or an Function.
+        // The method autocomplete creates a list of suggestions of matches to what the user has typed.
+        // Autocomplete can receive input from input elements, textarea elements and elements with the contenteditable attribute.
+        // Autocomplete has different options (parameters) you can use, but it shall always have a source option specified.
+        // Source option defines what data to use. It can be an Array, String or a Function.
         // Here it uses a function that serves as a callback that gets two arguments - a request object and a response callback.
-        // The function has a ajax request that fecth data from the external API.
+        // The function has an ajax request that fetch data from the external API.
         // The minLength option is also defined here to 3 - the number of characters a user must type before a search is performed.
 
         // https://api.jqueryui.com/autocomplete/
         // https://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm
-
-        // source - JSON fil - kan være hvad som helst. her er function bagefter, fordi man ønsker at få
-        // returneret et ajaxkald
         $('#commanderName, #partnerCommanderName').autocomplete(
             {
                 source: function (request, response) {
@@ -114,8 +111,8 @@
 
                                     // We only want to have unique card names listed in the suggested list.
                                     // To secure that we use the $.inArray() method that searches after if the card.name
-                                    // already exits in the commanderNameAPI array. If it exists it returns the index,
-                                    // but if it does not it return -1.
+                                    // already exists in the commanderNameAPI array. If it exists it returns the index,
+                                    // but if it does not it returns -1.
                                     // If it returns -1 the card.name is pushed (similar to add in Java) to the commanderNameAPI array
                                     if ($.inArray(card.name, commanderNameAPI) === -1) {
                                         commanderNameAPI.push(card.name);

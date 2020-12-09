@@ -29,7 +29,7 @@
 
             <div class="form-group col-sm-8">
                 <label>Partner Commander</label>
-                <input type="text" class="form-control" placeholder="Partner Commander"
+                <input type="text" class="form-control" placeholder="Udfyld KUN hvis decket har Partner Commander"
                        th:field="*{partnerCommanderName}">
                 <span th:if="${#fields.hasErrors('partnerCommanderName')}" th:errors="*{partnerCommanderName}"></span>
             </div>
@@ -77,9 +77,6 @@
 
         // https://api.jqueryui.com/autocomplete/
         // https://www.tutorialspoint.com/jqueryui/jqueryui_autocomplete.htm
-
-        // source - JSON fil - kan være hvad som helst. her er function bagefter, fordi man ønsker at få
-        // returneret et ajaxkald
         $('#commanderName, #partnerCommanderName').autocomplete(
             {
                 source: function (request, response) {
