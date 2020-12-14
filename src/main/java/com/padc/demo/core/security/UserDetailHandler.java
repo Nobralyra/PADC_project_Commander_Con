@@ -8,6 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * This class appers as a middle class between the current User and Spring Security.
+ * It contains information about the roles, the user has, and it has
+ * an access to al information about the user.
+ * It is the Securitycontext class, which gives an instance of this class,
+ * when the information about the current user is needed for instance in Controller.
+ */
 
 public class UserDetailHandler implements UserDetails {
 

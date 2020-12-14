@@ -16,7 +16,10 @@ public class JpaUserDetailsService implements UserDetailsService {
 
     private final IUserRepository iUserRepository;
 
-    //@Transactional
+    /**
+     * Loads user from database by username and returns UserDetailHandler (which
+     * implements UserDetails) with user as a parametre
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

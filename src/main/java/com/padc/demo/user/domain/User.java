@@ -10,7 +10,15 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-//https://github.com/springframeworkguru/ssc-brewery/blob/db-project-lombok/src/main/java/guru/sfg/brewery/domain/security/User.java
+/**
+ * Lombok is a dependency that creates constructors, mutators and accessors with annotations
+ * //https://github.com/springframeworkguru/ssc-brewery/blob/db-project-lombok/src/main/java/guru/sfg/brewery/domain/security/User.java
+ * This is a entity = table in the database. It consists 3 tables, because contact_info and login_info are
+ * separate secondary tables due to normalization forms
+ * NotBlank annotations makes sure that fields has input
+ * The user has only one role in this system
+ */
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -33,7 +41,6 @@ public class User extends Audition {
     @Column(table = "login_info")
     private String password;
 
-    //kun en rolle i dette system
     private Role role;
 
     @NotBlank(message = "Indtast venligst fornavn")

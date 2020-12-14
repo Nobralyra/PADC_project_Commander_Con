@@ -24,10 +24,14 @@ public class UserService implements IService<User>{
         this.securityConfig = securityConfig;
     }
 
+    /**
+     * securityConfig customizes security configurations and it is used here to
+     * hash the password, when the user is saved in database.
+     * The user gets participant as default role (role id 3)
+     */
     @Override
     public void save(User user) {
         user.setPassword(securityConfig.getEncoder().encode(user.getPassword()));
-        //participant as default (role 3)
         user.setRole(Role.ROLE_PARTICIPANT);
         iUserRepository.save(user);
     }
@@ -48,6 +52,11 @@ public class UserService implements IService<User>{
         return user.orElseThrow(EntityNotFoundException::new);
     }
 
+    /**
+     * returns alle users from the database and is used in UserController to check,
+     * the user is not already registered, when the user types her/his information
+     * @return al users in ArrayList
+     */
     @Override
     public List<User> findAll() {
         List<User> listen = new ArrayList<>();
@@ -57,6 +66,10 @@ public class UserService implements IService<User>{
         return listen;
     }
 
+    /**
+     * Is user by UserController when the user is deleted
+     * @param id
+     */
     @Override
     public void deleteByID(Long id) {
         iUserRepository.deleteById(id);
