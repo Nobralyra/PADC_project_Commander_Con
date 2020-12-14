@@ -6,6 +6,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * This class features as a controller to the customized login page.
+ */
+
 @EnableWebSecurity
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
